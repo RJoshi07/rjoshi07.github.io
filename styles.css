@@ -95,3 +95,7 @@ main h2 {
 main p {
     line-height: 1.6;
 }
+img {
+    width: 400px;
+    height: auto
+  }
