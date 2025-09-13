@@ -77,6 +77,8 @@
         <h2>1. Smaller Images</h2>
         <p>
             My goal for this part was to simply create a score metric which accurately assessed how "similar" two channels were and use that to determine the alignment of these images. To create my score metric, I tried both the L2 Norm between the two images as well as the NCC, and decided to go witht he former for these smaller images. Then, I looped between all possible  combinations from -15 and +15 for the height and width displacements. I displaced the red and green panels over the blue panel and calcuated the scores for both these pairs, settling on the two displacements which yielded the lowest scores. In order to calculate the scores for these displacements, I would temporarily crop the images so that they lined up with the proper displacement and then calculate the score between the new image matrices. 
+        </p>
+        <p>
             One issue which I ran into initially was innacurate scores. I noticed the displacements which were yielding the lowest scores where not the ones that seemed visually the most aligned. To fix this, I realize I would first have to crop the borders off of my images, since the borders are pure white, that would lead to big shifts in the scores which doesn't have to do with the alignment of the image itself. After doing this, the accuracy of my alignment improved greatly. 
         </p>
     </section>

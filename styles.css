@@ -139,6 +139,7 @@ figcaption {
   }
   
   figcaption .sub-caption {
+    display: block;
     font-size: 0.85rem; /* smaller size */
     color: #555;        /* make it lighter */
   }
