@@ -76,7 +76,7 @@
     <section class="project-section">
         <h2>1. Smaller Images</h2>
         <p>
-            My goal for this part was to simply create a score metric which accurately assessed how "similar" two channels were and use that to determine the alignment of these images. To create my score metric, I tried both the L2 Norm between the two images as well as the NCC, and decided to go witht he former for these smaller images. Then, I looped between all possible  combinations from -15 and +15 for the height and width displacements. I displaced the red and green panels over the blue panel and calcuated the scores for both these pairs, settling on the two displacements which yielded the lowest scores. In order to calculate the scores for these displacements, I would temporarily crop the images so that they lined up with the proper displacement and then calculate the score between the new image matrices. 
+            My goal for this part was to simply create a score metric which accurately assessed how "similar" two channels were and use that to determine the alignment of these images. To create my score metric, I tried both the L2 Norm between the two images as well as the NCC, and decided to go with the former for these smaller images. Then, I looped between all possible  combinations from -15 and +15 for the height and width displacements. I displaced the red and green panels over the blue panel and calcuated the scores for both these pairs, settling on the two displacements which yielded the lowest scores. In order to calculate the scores for these displacements, I would temporarily crop the images so that they lined up with the proper displacement and then calculate the score between the new image matrices. 
         </p>
         <p>
             One issue which I ran into initially was innacurate scores. I noticed the displacements which were yielding the lowest scores where not the ones that seemed visually the most aligned. To fix this, I realize I would first have to crop the borders off of my images, since the borders are pure white, that would lead to big shifts in the scores which doesn't have to do with the alignment of the image itself. After doing this, the accuracy of my alignment improved greatly. 
@@ -206,10 +206,12 @@
 
     <!-- Section 4: another block of text -->
     <section class="project-section">
-        <h2>Reflection</h2>
+        <h2>2. Image Pyramids for Larger Images</h2>
         <p>
-            Use this space to reflect on results and next steps. What would you do differently? What worked
-            better than expected? What did you learn about composition, light, and perspective?
+            On larger images, I found my original algorithm taking much longer, especially since I needed to calculate larger offsets for these images as well. Therefore, I attempted to speed up the alignment process by using image pyramids. To do this, I started by scaling down my image by a factor of 16. Then, I ran the same process as before, calculating the score for different offsets, this time from -10 to +10. Once i found the optimal offset on the coarse images, I rolled the original images by that amount of displacement and scaled it down by a factor of 8 next. I then repeated the same process again and again, scaling my image down by a smaller factor each time, until I came back up to the original image. I also searched a smaller and smaller window of displacement each time, since I didn't have to look as far each time. 
+        </p>
+        <p>
+            For the score calculation, I found NCC working slightly better for this part, so I opted to using that instead. One other issue i ran into was that some of my images still weren't aligning that well, particularly the Emir image. To combat this, I thought that perhaps rolling the image each time before calculating the score again on the next level up the pyramid might be altering the score, since the edges which eand up on the opposite side may skew the score. Therefore, when calculating the score, I cropped off 5% from each edge of the image, just to confirm that we are only calcuating the score off of the parts of image we are focused on aligning. 
         </p>
     </section>
 </main>
