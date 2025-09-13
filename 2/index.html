@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="../styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+
+<header>
+    <nav>
+        <h1>My Portfolio</h1>
+        <ul class="nav-links">
+            <li><a href="../../index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="#">Projects ▾</a>
+                <div class="dropdown-content">
+                    <a href="../1/index.html">Project 1</a>
+                    <a href="../2/index.html">Project 2</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Project 2</h1>
+    <section class="project-section">
+        <h2>Smaller Images</h2>
+        <div class="image-row">
+            <figure>
+                <img src="../2/cathedral_final.jpg" alt="Photo 1">
+                <figcaption>
+                    <span class="main-caption">Cathedral</span><br>
+                    <span class="sub-caption">R displacement : (3, 12)</span>
+                    <span class="sub-caption">G displacement : (2, 5)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/monastery_final.jpg" alt="Photo 2">
+                <figcaption>
+                    <span class="main-caption">Monastery</span><br>
+                    <span class="sub-caption">R displacement : (2, 3)</span>
+                    <span class="sub-caption">G displacement : (2, -3)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/tobolsk_final.jpg" alt="Photo 3">
+                <figcaption>
+                    <span class="main-caption">Tobolsk</span><br>
+                    <span class="sub-caption">R displacement : (3, 6)</span>
+                    <span class="sub-caption">G displacement : (3, 3)</span>
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="project-section">
+        <h2>1. Smaller Images</h2>
+        <p>
+            My goal for this part was to simply create a score metric which accurately assessed how "similar" two channels were and use that to determine the alignment of these images. To create my score metric, I tried both the L2 Norm between the two images as well as the NCC, and decided to go witht he former for these smaller images. Then, I looped between all possible  combinations from -15 and +15 for the height and width displacements. I displaced the red and green panels over the blue panel and calcuated the scores for both these pairs, settling on the two displacements which yielded the lowest scores. In order to calculate the scores for these displacements, I would temporarily crop the images so that they lined up with the proper displacement and then calculate the score between the new image matrices. 
+            One issue which I ran into initially was innacurate scores. I noticed the displacements which were yielding the lowest scores where not the ones that seemed visually the most aligned. To fix this, I realize I would first have to crop the borders off of my images, since the borders are pure white, that would lead to big shifts in the scores which doesn't have to do with the alignment of the image itself. After doing this, the accuracy of my alignment improved greatly. 
+        </p>
+    </section>
+
+    <section class="project-section">
+        <h2>Larger Images</h2>
+        <div class="image-grid cols-3">
+            <figure>
+                <img src="../2/church_final.jpg" alt="Church">
+                <figcaption>
+                    <span class="main-caption">Church</span><br>
+                    <span class="sub-caption">R displacement : (-4, 58)</span>
+                    <span class="sub-caption">G displacement : (4, 26)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/emir_final.jpg" alt="Emir">
+                <figcaption>
+                    <span class="main-caption">Emir</span><br>
+                    <span class="sub-caption">R displacement : (56, 104)</span>
+                    <span class="sub-caption">G displacement : (24, 50)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/harvesters_final.jpg" alt="Harvesters">
+                <figcaption>
+                    <span class="main-caption">Harvesters</span><br>
+                    <span class="sub-caption">R displacement : (14, 124)</span>
+                    <span class="sub-caption">G displacement : (16, 60)</span>
+                </figcaption>
+            </figure>
+
+            <figure>
+                <img src="../2/icon_final.jpg" alt="Icon">
+                <figcaption>
+                    <span class="main-caption">Icon</span><br>
+                    <span class="sub-caption">R displacement : (22, 90)</span>
+                    <span class="sub-caption">G displacement : (16, 40)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/lady_final.jpg" alt="Lady">
+                <figcaption>
+                    <span class="main-caption">Lady</span><br>
+                    <span class="sub-caption">R displacement : (12, 118)</span>
+                    <span class="sub-caption">G displacement : (8, 54)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/melons_final.jpg" alt="Melons">
+                <figcaption>
+                    <span class="main-caption">Melons</span><br>
+                    <span class="sub-caption">R displacement : (14, 178)</span>
+                    <span class="sub-caption">G displacement : (10, 82)</span>
+                </figcaption>
+            </figure>
+
+            <figure>
+                <img src="../2/onion_church_final.jpg" alt="Onion Church">
+                <figcaption>
+                    <span class="main-caption">Onion Church</span><br>
+                    <span class="sub-caption">R displacement : (36, 108)</span>
+                    <span class="sub-caption">G displacement : (26, 52)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/sculpture_final.jpg" alt="Sculpture">
+                <figcaption>
+                    <span class="main-caption">Sculpture</span><br>
+                    <span class="sub-caption">R displacement : (-26, 140)</span>
+                    <span class="sub-caption">G displacement : (-10, 34)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/self_portrait_final.jpg" alt="Self Portrait">
+                <figcaption>
+                    <span class="main-caption">Self Portrait</span><br>
+                    <span class="sub-caption">R displacement : (36, 174)</span>
+                    <span class="sub-caption">G displacement : (30, 80)</span>
+                </figcaption>
+            </figure>
+
+            <figure>
+                <img src="../2/three_generations_final.jpg" alt="Three Generations">
+                <figcaption>
+                    <span class="main-caption">Three Generations</span><br>
+                    <span class="sub-caption">R displacement : (10, 112)</span>
+                    <span class="sub-caption">G displacement : (14, 54)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/train_final.jpg" alt="Train">
+                <figcaption>
+                    <span class="main-caption">Three Generations</span><br>
+                    <span class="sub-caption">R displacement : (32, 88)</span>
+                    <span class="sub-caption">G displacement : (6, 42)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/gundukush_dam_final.jpg" alt="By the Gundukush Dam">
+                <figcaption>
+                    <span class="main-caption">By the Gundukush Dam</span><br>
+                    <span class="sub-caption">R displacement : (-60, 132)</span>
+                    <span class="sub-caption">G displacement : (-30, 56)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/lugano_final.jpg" alt="Lugano">
+                <figcaption>
+                    <span class="main-caption">Lugano</span><br>
+                    <span class="sub-caption">R displacement : (38, 886)</span>
+                    <span class="sub-caption">G displacement : (12, 36)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/irrigation_canal_final.jpg" alt="Irrigation Canal">
+                <figcaption>
+                    <span class="main-caption">Irrigation Canal</span><br>
+                    <span class="sub-caption">R displacement : (48, 46)</span>
+                    <span class="sub-caption">G displacement : (24, 28)</span>
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- Section 4: another block of text -->
+    <section class="project-section">
+        <h2>Reflection</h2>
+        <p>
+            Use this space to reflect on results and next steps. What would you do differently? What worked
+            better than expected? What did you learn about composition, light, and perspective?
+        </p>
+    </section>
+</main>
+
+<!-- Optional minimal helper styles if your stylesheet lacks grid classes
+     You can paste these into styles.css if needed:
+
+.image-grid { display: grid; gap: 1rem; }
+.image-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.image-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+.image-row figure, .image-grid figure { margin: 0; }
+img { max-width: 100%; height: auto; display: block; }
+
+-->
+
+</body>
+</html>

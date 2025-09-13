@@ -127,3 +127,18 @@ main p {
     height: auto;
     border-radius: 5px;
 }
+
+figcaption {
+    text-align: center;  /* keep captions centered under the image */
+    margin-top: 0.5em;
+  }
+  
+  figcaption .main-caption {
+    font-weight: bold;
+    font-size: 1rem; /* adjust as you like */
+  }
+  
+  figcaption .sub-caption {
+    font-size: 0.85rem; /* smaller size */
+    color: #555;        /* make it lighter */
+  }
