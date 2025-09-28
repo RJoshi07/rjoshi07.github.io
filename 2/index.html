@@ -234,18 +234,91 @@
         </div>
     </section>
 
-
-
-    <!-- Section 4: another block of text -->
     <section class="project-section">
-        <h2>2. Image Pyramids for Larger Images</h2>
+        <h2>2.1 Image "Sharpening"</h2>
         <p>
-            On larger images, I found my original algorithm taking much longer, especially since I needed to calculate larger offsets for these images as well. Therefore, I attempted to speed up the alignment process by using image pyramids. To do this, I started by scaling down my image by a factor of 16. Then, I ran the same process as before, calculating the score for different offsets, this time from -10 to +10. Once i found the optimal offset on the coarse images, I rolled the original images by that amount of displacement and scaled it down by a factor of 8 next. I then repeated the same process again and again, scaling my image down by a smaller factor each time, until I came back up to the original image. I also searched a smaller and smaller window of displacement each time, since I didn't have to look as far each time. 
+            In this section, I implemented the unsharp mask filter. To do this, I first convolved an image of the Taj Mahal with a gaussian filter. This essentially removes the high frequencies from the image. Then, to get just the high frequencies, I subtracted the blurred Taj Mahal from the original. Finally, I multipled the high frequency image by an alpha value and added it back to the original image to produce a sharper image. 
         </p>
+        <br>
+        <div class="image-grid cols-3">
+            <figure>
+                <img src="../2/taj.jpg" alt="taj">
+                <figcaption>
+                    <span class="main-caption">Original Image</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/taj_blurred.png" alt="taj_blurred">
+                <figcaption>
+                    <span class="main-caption">Blurred Taj Mahal</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/taj_high_freqs.png" alt="taj_high_freqs">
+                <figcaption>
+                    <span class="main-caption">High Frequencies</span><br>
+                </figcaption>
+            </figure>
+
+            <figure>
+                <img src="../2/taj_boosted_0.5.png" alt="taj_boosted_0.5">
+                <figcaption>
+                    <span class="main-caption">Boosted</span><br>
+                    <span class="sub-caption">alpha = 0.5</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/taj_boosted_1.png" alt="taj_boosted_1">
+                <figcaption>
+                    <span class="main-caption">Boosted</span><br>
+                    <span class="sub-caption">alpha = 1</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/taj_boosted_3.png" alt="taj_boosted_3">
+                <figcaption>
+                    <span class="main-caption">Boosted</span><br>
+                    <span class="sub-caption">alpha = 3</span>
+                </figcaption>
+            </figure>
+        </div>
+        <br>
         <p>
-            For the score calculation, I found NCC working slightly better for this part, so I opted to using that instead. One other issue i ran into was that some of my images still weren't aligning that well, particularly the Emir image. To combat this, I thought that perhaps rolling the image each time before calculating the score again on the next level up the pyramid might be altering the score, since the edges which eand up on the opposite side may skew the score. Therefore, when calculating the score, I cropped off 5% from each edge of the image, just to confirm that we are only calcuating the score off of the parts of image we are focused on aligning. 
+            I also repeated the same process on this image of the Eiffel Tower!
         </p>
+        <br>
+        <div class="image-grid cols-3">
+            <figure>
+                <img src="../2/eiffel.jpg" alt="eiffel">
+                <figcaption>
+                    <span class="main-caption">Original Image</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/eiffel_blurred.png" alt="eiffel_blurred">
+                <figcaption>
+                    <span class="main-caption">Blurred Eiffel Tower</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/eiffel_high_freqs.png" alt="eiffel_high_freqs">
+                <figcaption>
+                    <span class="main-caption">High Frequencies</span><br>
+                </figcaption>
+            </figure>    
+        </div>
+        <div class="image-row">
+            <figure>
+                <img src="../2/eiffel_boosted.png" alt="eiffel_boosted">
+                <figcaption>
+                    <span class="main-caption">Eiffel Tower Boosted</span><br>
+                </figcaption>
+            </figure>
+        </div>
+
     </section>
+
+    
 </main>
 
 <!-- Optional minimal helper styles if your stylesheet lacks grid classes
