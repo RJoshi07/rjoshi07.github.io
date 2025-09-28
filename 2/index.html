@@ -283,6 +283,10 @@
             </figure>
         </div>
         <br>
+        <p> 
+            I also experimented with different alpha values to test the sharpening effect. Smaller alphas yield results similar to the original image, while alpha values that are too large yield unnatural results. 
+        </p>
+        <br>
         <p>
             I also repeated the same process on this image of the Eiffel Tower!
         </p>
@@ -310,8 +314,182 @@
                 <img src="../2/eiffel_boosted.png" alt="eiffel_boosted">
                 <figcaption>
                     <span class="main-caption">Eiffel Tower Boosted</span><br>
+                    <span class="sub-caption">alpha = 1</span>
                 </figcaption>
             </figure>  
+        </div>
+
+    </section>
+
+    <section class="project-section">
+        <h2>2.2 Hybrid Images"</h2>
+        <p>
+            In this section, I created hybrid images! I started off my aligning my images using the starter code. I had to manually find points to align on and then plug them into the alignment functions. For all 3 hybrid images I did, my images had eyes, so I chose those points to align on. 
+            Then, I chose one image to be the "low-frequency" image. To this image, I applied a Gaussian filter with sigma = 10. The size of the filter is then calculated as 6 * sigma + 1. Then, to the other image, I applied the same Gaussian filter, but this time, subtracted the low frequency image from the origial to get the high frequency version of the image. Finally I stacks the images by taking their average. 
+            I did some trial and error to find the right sigma, but I felt that this choice balanced the visibility of the high frequency image and how much it covered up the low frequency image. 
+        </p>
+        <br>
+        <div class="image-grid cols-3">
+            <figure>
+                <img src="../2/hybrid_python/nutmeg.jpg" alt="nutmeg">
+                <figcaption>
+                    <span class="main-caption">Original Nutmeg</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/cat_aligned.png" alt="cat_aligned">
+                <figcaption>
+                    <span class="main-caption">Nutmeg Aligned</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/cat_fft_1.png" alt="cat_fft_1">
+                <figcaption>
+                    <span class="main-caption">Nutmeg FFT</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/hybrid_python/DerekPicture.jpg" alt="DerekPicture">
+                <figcaption>
+                    <span class="main-caption">Original Derek</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/derek_aligned.png" alt="derek_aligned">
+                <figcaption>
+                    <span class="main-caption">Derek Aligned</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/derek_fft_1.png" alt="derek_fft_1">
+                <figcaption>
+                    <span class="main-caption">Derek FFT</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <br>
+        <div class="image-grid cols-3">
+            <figure>
+                <img src="../2/low_pass_derek.png" alt="low_pass_derek">
+                <figcaption>
+                    <span class="main-caption">Low-Pass Filtered Derek</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/derek_fft_2.png" alt="derek_fft_2">
+                <figcaption>
+                    <span class="main-caption">Low-Pass Filtered Derek FFT</span><br>
+                </figcaption>
+            </figure> 
+        </div>
+        <div class="image-grid cols-3">
+            <figure>
+                <img src="../2/high_pass_cat.png" alt="high_pass_cat">
+                <figcaption>
+                    <span class="main-caption">High-Pass Filtered Nutmeg</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/cat_fft_2.png" alt="cat_fft_2">
+                <figcaption>
+                    <span class="main-caption">High-Pass Filtered Nutmeg FFT</span><br>
+                </figcaption>
+            </figure> 
+        </div>
+        <div class="image-grid cols-3">
+            <figure>
+                <img src="../2/derek_x_nutmeg.png" alt="derek_x_nutmeg">
+                <figcaption>
+                    <span class="main-caption">Hybrid Derek x Nutmeg</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/final_fft.png" alt="final_fft">
+                <figcaption>
+                    <span class="main-caption">Hybrid FFT</span><br>
+                </figcaption>
+            </figure> 
+        </div>
+        <br>
+        <p>
+            I also created a hybrid image of Lorelai and Rory Gilmore from the show Gilmore Girls!
+        </p>
+        <br>
+        <div class="image-grid cols-3">
+            <figure>
+                <img src="../2/rory.png" alt="rory">
+                <figcaption>
+                    <span class="main-caption">Rory Gilmore</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/lorelai.png" alt="lorelai">
+                <figcaption>
+                    <span class="main-caption">Lorelai Gilmore</span><br>
+                </figcaption>
+            </figure> 
+        </div>
+        <div class="image-grid cols-3">
+            <figure>
+                <img src="../2/high_pass_rory.png" alt="high_pass_rory">
+                <figcaption>
+                    <span class="main-caption">High-Pass Filtered Rory Gilmore</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/low_pass_lorelai.png" alt="low_pass_lorelai">
+                <figcaption>
+                    <span class="main-caption">Low-Pass Filtered Lorelai Gilmore</span><br>
+                </figcaption>
+            </figure> 
+        </div>
+        <div class="image-grid cols-3">
+            <figure>
+                <img src="../2/roryxlor.png" alt="roryxlor">
+                <figcaption>
+                    <span class="main-caption">Hybrid Rory x Lorelai</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <p>
+            And finally, a hybrid of my pet cat Merlin, and my friend's dog Pandy!
+        </p>
+        <br>
+        <div class="image-grid cols-3">
+            <figure>
+                <img src="../2/merlin.png" alt="merlin">
+                <figcaption>
+                    <span class="main-caption">Merlin</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/pandy.png" alt="pandy">
+                <figcaption>
+                    <span class="main-caption">Pandy</span><br>
+                </figcaption>
+            </figure> 
+        </div>
+        <div class="image-grid cols-3">
+            <figure>
+                <img src="../2/high_pass_merlin.png" alt="high_pass_merlin">
+                <figcaption>
+                    <span class="main-caption">High-Pass Filtered Merlin</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/low_pass_pandy.png" alt="low_pass_pandy">
+                <figcaption>
+                    <span class="main-caption">Low-Pass Filtered Pandy</span><br>
+                </figcaption>
+            </figure> 
+        </div>
+        <div class="image-grid cols-3">
+            <figure>
+                <img src="../2/merlinxpandy.png" alt="merlinxpandy">
+                <figcaption>
+                    <span class="main-caption">Hybrid Merlin x Pandy</span><br>
+                </figcaption>
+            </figure>
         </div>
 
     </section>
