@@ -50,10 +50,11 @@
         </p>
         <br>
         <pre><code>
-            def convolve_4_loops(img, filter, pad = 0):
+            def convolve_4_loops(img, filter):
                 filter = filter[::-1, ::-1]
-                if pad != 0:
-                    img = np.pad(img, pad_width=((pad, pad), (pad, pad)), mode='constant', constant_values=0)
+                pad_w = filter.shape[0]//2
+                pad_h = filter.shape[1]//2
+                img = np.pad(img, pad_width=((pad_w, pad_w), (pad_h, pad_h)), mode='constant', constant_values=0)
 
                 output_r = img.shape[0] - filter.shape[0] + 1
                 output_c = img.shape[1] - filter.shape[1] + 1
@@ -72,9 +73,10 @@
 
             def convolve_2_loops(img, filter, pad = 0):
                 filter = filter[::-1, ::-1]
-                if pad != 0:
-                    img = np.pad(img, pad_width=((pad, pad), (pad, pad)), mode='constant', constant_values=0)
-
+                pad_w = filter.shape[0]//2
+                pad_h = filter.shape[1]//2
+                img = np.pad(img, pad_width=((pad_w, pad_w), (pad_h, pad_h)), mode='constant', constant_values=0)
+                
                 output_r = img.shape[0] - filter.shape[0] + 1
                 output_c = img.shape[1] - filter.shape[1] + 1
 
@@ -151,32 +153,32 @@
         <h2>Larger Images</h2>
         <div class="image-grid cols-3">
             <figure>
-                <img src="../2/cameraman.jpg" alt="Church">
+                <img src="../2/cameraman.png" alt="cameraman">
                 <figcaption>
                     <span class="main-caption">Original Image</span><br>
                 </figcaption>
             </figure>
             <figure>
-                <img src="../2/cameraman_dx.jpg" alt="Emir">
+                <img src="../2/cameraman_dx.png" alt="cameraman_dx">
                 <figcaption>
                     <span class="main-caption">Convolved with Dx</span><br>
                 </figcaption>
             </figure>
             <figure>
-                <img src="../2/cameraman_dy.jpg" alt="Harvesters">
+                <img src="../2/cameraman_dy.png" alt="cameraman_dy">
                 <figcaption>
                     <span class="main-caption">Convolved with Dy</span><br>
                 </figcaption>
             </figure>
 
             <figure>
-                <img src="../2/cameraman_gradient.jpg" alt="Icon">
+                <img src="../2/cameraman_gradient.png" alt="cameraman_gradient">
                 <figcaption>
                     <span class="main-caption">Gradient</span><br>
                 </figcaption>
             </figure>
             <figure>
-                <img src="../2/cameraman_edges.jpg" alt="Lady">
+                <img src="../2/cameraman_edges.png" alt="cameraman_edges">
                 <figcaption>
                     <span class="main-caption">Edges</span><br>
                 </figcaption>
@@ -195,19 +197,19 @@
         <h2></h2>
         <div class="image-row">
             <figure>
-                <img src="../2/cameraman_blurred.jpg" alt="Church">
+                <img src="../2/cameraman_blurred.png" alt="cameraman_blurred">
                 <figcaption>
                     <span class="main-caption">Blurred Image</span><br>
                 </figcaption>
             </figure>
             <figure>
-                <img src="../2/cameraman_new_gradient_1.jpg" alt="Emir">
+                <img src="../2/cameraman_new_gradient_1.png" alt="cameraman_new_gradient_1">
                 <figcaption>
                     <span class="main-caption">Gradient</span><br>
                 </figcaption>
             </figure>
             <figure>
-                <img src="../2/cameraman_new_edges_1.jpg" alt="Harvesters">
+                <img src="../2/cameraman_new_edges_1.png" alt="cameraman_new_edges_1">
                 <figcaption>
                     <span class="main-caption">Edges</span><br>
                 </figcaption>
@@ -225,13 +227,13 @@
         <h2></h2>
         <div class="image-row">
             <figure>
-                <img src="../2/cameraman_new_gradient_2.jpg" alt="Emir">
+                <img src="../2/cameraman_new_gradient_2.png" alt="cameraman_new_gradient_2">
                 <figcaption>
                     <span class="main-caption">Gradient using DoG</span><br>
                 </figcaption>
             </figure>
             <figure>
-                <img src="../2/cameraman_new_edges_2.jpg" alt="Harvesters">
+                <img src="../2/cameraman_new_edges_2.png" alt="cameraman_new_edges_2">
                 <figcaption>
                     <span class="main-caption">Edges using DoG</span><br>
                 </figcaption>
