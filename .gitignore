@@ -10,3 +10,8 @@ venv/
 .venv/
 2/cs180_p1/
 
+1/cs180_p1/
+venv/
+.venv/
+env/
+node_modules/
