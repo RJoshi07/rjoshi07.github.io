@@ -213,7 +213,7 @@
         </div>
         <br>
         <p>
-            I then repeated the same process except this time, instead of blurring the image itself with the Gaussian, I convolved the Gaussian itself with Dx and Dy before convoling the image with the Gaussian. This produced the same result. 
+            I then repeated the same process except this time, instead of blurring the image itself with the Gaussian, I convolved the Gaussian itself with Dx and Dy before convolving the image with the Gaussian. This produced the same result. 
         </p>
         <br>
 
@@ -325,7 +325,7 @@
         <h2>2.2 Hybrid Images"</h2>
         <p>
             In this section, I created hybrid images! I started off my aligning my images using the starter code. I had to manually find points to align on and then plug them into the alignment functions. For all 3 hybrid images I did, my images had eyes, so I chose those points to align on. 
-            Then, I chose one image to be the "low-frequency" image. To this image, I applied a Gaussian filter with sigma = 10. The size of the filter is then calculated as 6 * sigma + 1. Then, to the other image, I applied the same Gaussian filter, but this time, subtracted the low frequency image from the origial to get the high frequency version of the image. Finally I stacks the images by taking their average. 
+            Then, I chose one image to be the "low-frequency" image. To this image, I applied a Gaussian filter with sigma = 10. The size of the filter is then calculated as 6 * sigma + 1. Then, to the other image, I applied the same Gaussian filter, but this time, subtracted the low frequency image from the origial to get the high frequency version of the image. Finally I stacked the images by taking their average. 
             I did some trial and error to find the right sigma, but I felt that this choice balanced the visibility of the high frequency image and how much it covered up the low frequency image. 
         </p>
         <br>
@@ -494,6 +494,61 @@
 
     </section>
 
+    <section class="project-section">
+        <h2>2.3 Gaussian and Laplacian Stacks</h2>
+        <br>
+        <p>
+            In this section, I implemented Gaussian and Laplacian Stacks. To do this, I convolved my images with Gaussian filters with increasing values of sigma in 6 iterations. This produced the layers of my Gaussian stack. Then, to get the Laplacian stack layers, I subtracted each level of the Gaussian stack from the level above it. 
+        </p>
+        <br>
+        <div class="image-grid cols-3">
+            <figure>
+                <img src="../2/apple_mask_1.png" alt="apple_mask_1">
+            </figure>
+            <figure>
+                <img src="../2/orange_mask_1.png" alt="apple_mask_1">
+            </figure>
+            <figure>
+                <img src="../2/blended_mask_1.png" alt="apple_mask_1">
+            </figure>
+            <figure>
+                <img src="../2/apple_mask_2.png" alt="apple_mask_2">
+            </figure>
+            <figure>
+                <img src="../2/orange_mask_2.png" alt="apple_mask_2">
+            </figure>
+            <figure>
+                <img src="../2/blended_mask_.png" alt="apple_mask_2">
+            </figure>
+            <figure>
+                <img src="../2/apple_mask_3.png" alt="apple_mask_3">
+            </figure>
+            <figure>
+                <img src="../2/orange_mask_3.png" alt="apple_mask_3">
+            </figure>
+            <figure>
+                <img src="../2/blended_mask_3.png" alt="apple_mask_3">
+            </figure>
+            <figure>
+                <img src="../2/apple_mask_4.png" alt="apple_mask_4">
+            </figure>
+            <figure>
+                <img src="../2/orange_mask_4.png" alt="apple_mask_4">
+            </figure>
+            <figure>
+                <img src="../2/blended_mask_4.png" alt="apple_mask_4">
+            </figure>
+            <figure>
+                <img src="../2/final_apple.png" alt="final_apple">
+            </figure>
+            <figure>
+                <img src="../2/final_orange.png" alt="final_orange">
+            </figure>
+            <figure>
+                <img src="../2/oraple.png" alt="oraple">
+            </figure>
+        </div>
+    </section>
     
 </main>
 
