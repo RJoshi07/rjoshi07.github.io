@@ -4,6 +4,24 @@
     <title>My Portfolio</title>
     <link rel="stylesheet" href="../styles.css">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        /* Ensure Section 3 images are scaled down to fit */
+        .image-grid img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        }
+        .image-grid.cols-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        }
+        .image-grid figure {
+        margin: 0;
+        text-align: center;
+        }
+        </style>
 </head>
 <body>
 
@@ -15,8 +33,8 @@
             <li class="dropdown">
                 <a href="#">Projects ▾</a>
                 <div class="dropdown-content">
+                    <a href="../0/index.html">Project 0</a>
                     <a href="../1/index.html">Project 1</a>
-                    <a href="../2/index.html">Project 2</a>
                 </div>
             </li>
         </ul>
@@ -25,47 +43,189 @@
 
 <main>
     <h1>Project 1</h1>
-
     <section class="project-section">
-        <h2>Selfie: The Wrong Way VS The Right Way</h2>
+        <h2>Smaller Images</h2>
         <div class="image-row">
             <figure>
-                <img src="../1/images/IMG_0017.jpg" alt="The Wrong Way">
-                <p>The Wrong Way</p>
+                <img src="../1/cathedral_final.jpg" alt="Photo 1">
+                <figcaption>
+                    <span class="main-caption">Cathedral</span><br>
+                    <span class="sub-caption">R displacement : (3, 12)  </span>
+                    <span class="sub-caption">G displacement : (2, 5)   </span>
+                </figcaption>
             </figure>
             <figure>
-                <img src="../1/images/IMG_0018.jpg" alt="The Right Way">
-                <p>The Right Way</p>
+                <img src="../1/monastery_final.jpg" alt="Photo 2">
+                <figcaption>
+                    <span class="main-caption">Monastery</span><br>
+                    <span class="sub-caption">R displacement : (2, 3)</span>
+                    <span class="sub-caption">G displacement : (2, -3)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../1/tobolsk_final.jpg" alt="Photo 3">
+                <figcaption>
+                    <span class="main-caption">Tobolsk</span><br>
+                    <span class="sub-caption">R displacement : (3, 6)</span>
+                    <span class="sub-caption">G displacement : (3, 3)</span>
+                </figcaption>
             </figure>
         </div>
-        <p>This is a picture of my friend! In the zoomed in image, her face looks much flatter and in the close up image, the center of her face sticks out towards the camera, while the sides seem farther back, making her face look distorted</p>
     </section>
 
     <section class="project-section">
-        <h2>Architectural Perspective Compression</h2>
-        <div class="image-row">
-            <figure>
-                <img src="../1/images/IMG_1819.jpg" alt="With Zoom">
-                <p>With Zoom</p>
-            </figure>
-            <figure>
-                <img src="../1/images/IMG_1820.jpg" alt="Without Zoom">
-                <p>Without Zoom</p>
-            </figure>
-        </div>
-        <p>This picture of Telegraph looks much flatter when I zoom in from a far distance. If I take the image closer up without zooming, the perspective of the street seems to more angled, making the picture appear to have more depth.</p>
+        <h2>1. Smaller Images</h2>
+        <p>
+            My goal for this part was to simply create a score metric which accurately assessed how "similar" two channels were and use that to determine the alignment of these images. To create my score metric, I tried both the L2 Norm between the two images as well as the NCC, and decided to go with the former for these smaller images. Then, I looped between all possible  combinations from -15 and +15 for the height and width displacements. I displaced the red and green panels over the blue panel and calcuated the scores for both these pairs, settling on the two displacements which yielded the lowest scores. In order to calculate the scores for these displacements, I would temporarily crop the images so that they lined up with the proper displacement and then calculate the score between the new image matrices. 
+        </p>
+        <p>
+            One issue which I ran into initially was innacurate scores. I noticed the displacements which were yielding the lowest scores where not the ones that seemed visually the most aligned. To fix this, I realize I would first have to crop the borders off of my images, since the borders are pure white, that would lead to big shifts in the scores which doesn't have to do with the alignment of the image itself. Therefore, I started off by cropping 5% off of each side of the image. After doing this, the accuracy of my alignment improved greatly. 
+        </p>
     </section>
 
     <section class="project-section">
-        <h2>The Dolly Zoom</h2>
-        <div class="image-row">
+        <h2>Larger Images</h2>
+        <div class="image-grid cols-3">
             <figure>
-                <img src="images/dolly_zoom.gif" alt="Dolly Zoom">
-                <p>Dolly Zoom Effect</p>
+                <img src="../1/church_final.jpg" alt="Church">
+                <figcaption>
+                    <span class="main-caption">Church</span><br>
+                    <span class="sub-caption">R displacement : (-4, 58)</span>
+                    <span class="sub-caption">G displacement : (4, 26)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../1/emir_final.jpg" alt="Emir">
+                <figcaption>
+                    <span class="main-caption">Emir</span><br>
+                    <span class="sub-caption">R displacement : (56, 104)</span>
+                    <span class="sub-caption">G displacement : (24, 50)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../1/harvesters_final.jpg" alt="Harvesters">
+                <figcaption>
+                    <span class="main-caption">Harvesters</span><br>
+                    <span class="sub-caption">R displacement : (14, 124)</span>
+                    <span class="sub-caption">G displacement : (16, 60)</span>
+                </figcaption>
+            </figure>
+
+            <figure>
+                <img src="../1/icon_final.jpg" alt="Icon">
+                <figcaption>
+                    <span class="main-caption">Icon</span><br>
+                    <span class="sub-caption">R displacement : (22, 90)</span>
+                    <span class="sub-caption">G displacement : (16, 40)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../1/lady_final.jpg" alt="Lady">
+                <figcaption>
+                    <span class="main-caption">Lady</span><br>
+                    <span class="sub-caption">R displacement : (12, 118)</span>
+                    <span class="sub-caption">G displacement : (8, 54)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../1/melons_final.jpg" alt="Melons">
+                <figcaption>
+                    <span class="main-caption">Melons</span><br>
+                    <span class="sub-caption">R displacement : (14, 178)</span>
+                    <span class="sub-caption">G displacement : (10, 82)</span>
+                </figcaption>
+            </figure>
+
+            <figure>
+                <img src="../1/onion_church_final.jpg" alt="Onion Church">
+                <figcaption>
+                    <span class="main-caption">Onion Church</span><br>
+                    <span class="sub-caption">R displacement : (36, 108)</span>
+                    <span class="sub-caption">G displacement : (26, 52)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../1/sculpture_final.jpg" alt="Sculpture">
+                <figcaption>
+                    <span class="main-caption">Sculpture</span><br>
+                    <span class="sub-caption">R displacement : (-26, 140)</span>
+                    <span class="sub-caption">G displacement : (-10, 34)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../1/self_portrait_final.jpg" alt="Self Portrait">
+                <figcaption>
+                    <span class="main-caption">Self Portrait</span><br>
+                    <span class="sub-caption">R displacement : (36, 174)</span>
+                    <span class="sub-caption">G displacement : (30, 80)</span>
+                </figcaption>
+            </figure>
+
+            <figure>
+                <img src="../1/three_generations_final.jpg" alt="Three Generations">
+                <figcaption>
+                    <span class="main-caption">Three Generations</span><br>
+                    <span class="sub-caption">R displacement : (10, 112)</span>
+                    <span class="sub-caption">G displacement : (14, 54)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../1/train_final.jpg" alt="Train">
+                <figcaption>
+                    <span class="main-caption">Three Generations</span><br>
+                    <span class="sub-caption">R displacement : (32, 88)</span>
+                    <span class="sub-caption">G displacement : (6, 42)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../1/gundukush_dam_final.jpg" alt="By the Gundukush Dam">
+                <figcaption>
+                    <span class="main-caption">By the Gundukush Dam</span><br>
+                    <span class="sub-caption">R displacement : (-60, 132)</span>
+                    <span class="sub-caption">G displacement : (-30, 56)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../1/lugano_final.jpg" alt="Lugano">
+                <figcaption>
+                    <span class="main-caption">Lugano</span><br>
+                    <span class="sub-caption">R displacement : (38, 886)</span>
+                    <span class="sub-caption">G displacement : (12, 36)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../1/irrigation_canal_final.jpg" alt="Irrigation Canal">
+                <figcaption>
+                    <span class="main-caption">Irrigation Canal</span><br>
+                    <span class="sub-caption">R displacement : (48, 46)</span>
+                    <span class="sub-caption">G displacement : (24, 28)</span>
+                </figcaption>
             </figure>
         </div>
-        <p>This dolly zoom is of my stuffed animal cat! As I pull away and use more zoom, the background seems to get smaller, with elements like the window and fan disappearing from the frames.</p>
+    </section>
+
+    <!-- Section 4: another block of text -->
+    <section class="project-section">
+        <h2>2. Image Pyramids for Larger Images</h2>
+        <p>
+            On larger images, I found my original algorithm taking much longer, especially since I needed to calculate larger offsets for these images as well. Therefore, I attempted to speed up the alignment process by using image pyramids. To do this, I started by scaling down my image by a factor of 16. Then, I ran the same process as before, calculating the score for different offsets, this time from -10 to +10. Once i found the optimal offset on the coarse images, I rolled the original images by that amount of displacement and scaled it down by a factor of 8 next. I then repeated the same process again and again, scaling my image down by a smaller factor each time, until I came back up to the original image. I also searched a smaller and smaller window of displacement each time, since I didn't have to look as far each time. 
+        </p>
+        <p>
+            For the score calculation, I found NCC working slightly better for this part, so I opted to using that instead. One other issue i ran into was that some of my images still weren't aligning that well, particularly the Emir image. To combat this, I thought that perhaps rolling the image each time before calculating the score again on the next level up the pyramid might be altering the score, since the edges which eand up on the opposite side may skew the score. Therefore, when calculating the score, I cropped off 5% from each edge of the image, just to confirm that we are only calcuating the score off of the parts of image we are focused on aligning. 
+        </p>
     </section>
 </main>
+
+<!-- Optional minimal helper styles if your stylesheet lacks grid classes
+     You can paste these into styles.css if needed:
+
+.image-grid { display: grid; gap: 1rem; }
+.image-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.image-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+.image-row figure, .image-grid figure { margin: 0; }
+img { max-width: 100%; height: auto; display: block; }
+
+-->
+
 </body>
 </html>

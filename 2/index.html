@@ -33,8 +33,8 @@
             <li class="dropdown">
                 <a href="#">Projects ▾</a>
                 <div class="dropdown-content">
+                    <a href="../0/index.html">Project 0</a>
                     <a href="../1/index.html">Project 1</a>
-                    <a href="../2/index.html">Project 2</a>
                 </div>
             </li>
         </ul>
@@ -42,44 +42,108 @@
 </header>
 
 <main>
-    <h1>Project 2</h1>
+    <h1>Project 1</h1>
     <section class="project-section">
-        <h2>Smaller Images</h2>
+        <h2>1.1 Convolutions From Scratch!</h2>
+        <p>
+            In this section I implemented the 2D Convolution Function with 4 loops, and then with 2 loops. The following the results of those, as well as the reuslt of scipy.signal.conv2d. I convolved an image of myself with a 9 x 9 box filter. 
+        </p>
+        <br>
+        <pre><code>
+            def convolve_4_loops(img, filter, pad = 0):
+                filter = filter[::-1, ::-1]
+                if pad != 0:
+                    img = np.pad(img, pad_width=((pad, pad), (pad, pad)), mode='constant', constant_values=0)
+
+                output_r = img.shape[0] - filter.shape[0] + 1
+                output_c = img.shape[1] - filter.shape[1] + 1
+
+
+                output = np.zeros((output_r, output_c))
+                for start_r in range(output_r):
+                    for start_c in range(output_c):
+                        dot_prod = 0
+                        for r in range(filter.shape[0]):
+                            for c in range(filter.shape[1]):
+                                dot_prod += filter[r][c] * img[start_r + r][start_c + c]
+                        output[start_r][start_c] = dot_prod
+                return output
+
+
+            def convolve_2_loops(img, filter, pad = 0):
+                filter = filter[::-1, ::-1]
+                if pad != 0:
+                    img = np.pad(img, pad_width=((pad, pad), (pad, pad)), mode='constant', constant_values=0)
+
+                output_r = img.shape[0] - filter.shape[0] + 1
+                output_c = img.shape[1] - filter.shape[1] + 1
+
+
+                output = np.zeros((output_r, output_c))
+                for start_r in range(output_r):
+                    for start_c in range(output_c):
+                        dot_prod = np.sum(filter * img[start_r:start_r+filter.shape[0], start_c:start_c+filter.shape[1]])
+                        output[start_r][start_c] = dot_prod
+                return output
+        </code></pre>
         <div class="image-row">
             <figure>
-                <img src="../2/cathedral_final.jpg" alt="Photo 1">
+                <img src="../2/me_box_1.png" alt="Photo 3">
                 <figcaption>
-                    <span class="main-caption">Cathedral</span><br>
-                    <span class="sub-caption">R displacement : (3, 12)  </span>
-                    <span class="sub-caption">G displacement : (2, 5)   </span>
+                    <span class="main-caption">4 Loops</span><br>
+                    <span class="sub-caption">Runtime: 2m 32.3s</span>
                 </figcaption>
             </figure>
             <figure>
-                <img src="../2/monastery_final.jpg" alt="Photo 2">
+                <img src="../2/me_box_2.png" alt="Photo 3">
                 <figcaption>
-                    <span class="main-caption">Monastery</span><br>
-                    <span class="sub-caption">R displacement : (2, 3)</span>
-                    <span class="sub-caption">G displacement : (2, -3)</span>
+                    <span class="main-caption">2 Loops</span><br>
+                    <span class="sub-caption">Runtime: 15.2s</span>
                 </figcaption>
             </figure>
             <figure>
-                <img src="../2/tobolsk_final.jpg" alt="Photo 3">
+                <img src="../2/me_box_3.png" alt="Photo 3">
                 <figcaption>
-                    <span class="main-caption">Tobolsk</span><br>
-                    <span class="sub-caption">R displacement : (3, 6)</span>
-                    <span class="sub-caption">G displacement : (3, 3)</span>
+                    <span class="main-caption">SciPy</span><br>
+                    <span class="sub-caption">Runtime: 0.6s</span>
+                </figcaption>
+            </figure>
+        </div>
+        <br>
+        <p>
+            For padding, I handled it the same way SciPy does when the mode = "same" (i.e. the output should be the same size as the input). This means, I calculated the horizontal padding as (P-1)/2 and the vertical padding as (Q-1)/2. This ensures that the output is the same size as the first image I pass in. 
+
+            For runtime, I noticed that the runtime of my method with 4 loops is much slower than my 2 loops method, which is slightly slower than the SciPy method. This makes sense, because using NumPy for some of the matrix calculations is sure to be faster, since it can parallelize many of the operations, and SciPy's built-in function is sure to be optimized. 
+        </p>
+
+        <br>
+        <h3>Convolving With Different Filters</h3>
+        <div class="image-row">
+            <figure>
+                <img src="../2/me_box_1.png" alt="Photo 3">
+                <figcaption>
+                    <span class="main-caption">9 x 9 Box Filter</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/me_dx.png" alt="Photo 3">
+                <figcaption>
+                    <span class="main-caption">Dx</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../2/me_dy.png" alt="Photo 3">
+                <figcaption>
+                    <span class="main-caption">Dy</span><br>
                 </figcaption>
             </figure>
         </div>
     </section>
 
     <section class="project-section">
-        <h2>1. Smaller Images</h2>
+        <h2>1.2 Finite Difference Operator</h2>
         <p>
-            My goal for this part was to simply create a score metric which accurately assessed how "similar" two channels were and use that to determine the alignment of these images. To create my score metric, I tried both the L2 Norm between the two images as well as the NCC, and decided to go with the former for these smaller images. Then, I looped between all possible  combinations from -15 and +15 for the height and width displacements. I displaced the red and green panels over the blue panel and calcuated the scores for both these pairs, settling on the two displacements which yielded the lowest scores. In order to calculate the scores for these displacements, I would temporarily crop the images so that they lined up with the proper displacement and then calculate the score between the new image matrices. 
-        </p>
-        <p>
-            One issue which I ran into initially was innacurate scores. I noticed the displacements which were yielding the lowest scores where not the ones that seemed visually the most aligned. To fix this, I realize I would first have to crop the borders off of my images, since the borders are pure white, that would lead to big shifts in the scores which doesn't have to do with the alignment of the image itself. Therefore, I started off by cropping 5% off of each side of the image. After doing this, the accuracy of my alignment improved greatly. 
+            For this section, I convolved the cameraman image with the Dx and Dy filters and used that to compute the gradient. From there, I played around with a cutoff to produce a relatively clean image of the cameraman edges. I was looking for a good balance of reduced noise (which I especially saw in the form of dots towards the bottom of the image) and a clear image of the cameraman (making the threshold too large resulted in the edges breaking and not forming a clear picture).
         </p>
     </section>
 
@@ -87,118 +151,89 @@
         <h2>Larger Images</h2>
         <div class="image-grid cols-3">
             <figure>
-                <img src="../2/church_final.jpg" alt="Church">
+                <img src="../2/cameraman.jpg" alt="Church">
                 <figcaption>
-                    <span class="main-caption">Church</span><br>
-                    <span class="sub-caption">R displacement : (-4, 58)</span>
-                    <span class="sub-caption">G displacement : (4, 26)</span>
+                    <span class="main-caption">Original Image</span><br>
                 </figcaption>
             </figure>
             <figure>
-                <img src="../2/emir_final.jpg" alt="Emir">
+                <img src="../2/cameraman_dx.jpg" alt="Emir">
                 <figcaption>
-                    <span class="main-caption">Emir</span><br>
-                    <span class="sub-caption">R displacement : (56, 104)</span>
-                    <span class="sub-caption">G displacement : (24, 50)</span>
+                    <span class="main-caption">Convolved with Dx</span><br>
                 </figcaption>
             </figure>
             <figure>
-                <img src="../2/harvesters_final.jpg" alt="Harvesters">
+                <img src="../2/cameraman_dy.jpg" alt="Harvesters">
                 <figcaption>
-                    <span class="main-caption">Harvesters</span><br>
-                    <span class="sub-caption">R displacement : (14, 124)</span>
-                    <span class="sub-caption">G displacement : (16, 60)</span>
+                    <span class="main-caption">Convolved with Dy</span><br>
                 </figcaption>
             </figure>
 
             <figure>
-                <img src="../2/icon_final.jpg" alt="Icon">
+                <img src="../2/cameraman_gradient.jpg" alt="Icon">
                 <figcaption>
-                    <span class="main-caption">Icon</span><br>
-                    <span class="sub-caption">R displacement : (22, 90)</span>
-                    <span class="sub-caption">G displacement : (16, 40)</span>
+                    <span class="main-caption">Gradient</span><br>
                 </figcaption>
             </figure>
             <figure>
-                <img src="../2/lady_final.jpg" alt="Lady">
+                <img src="../2/cameraman_edges.jpg" alt="Lady">
                 <figcaption>
-                    <span class="main-caption">Lady</span><br>
-                    <span class="sub-caption">R displacement : (12, 118)</span>
-                    <span class="sub-caption">G displacement : (8, 54)</span>
+                    <span class="main-caption">Edges</span><br>
                 </figcaption>
             </figure>
-            <figure>
-                <img src="../2/melons_final.jpg" alt="Melons">
-                <figcaption>
-                    <span class="main-caption">Melons</span><br>
-                    <span class="sub-caption">R displacement : (14, 178)</span>
-                    <span class="sub-caption">G displacement : (10, 82)</span>
-                </figcaption>
-            </figure>
+        </div>
+    </section>
 
-            <figure>
-                <img src="../2/onion_church_final.jpg" alt="Onion Church">
-                <figcaption>
-                    <span class="main-caption">Onion Church</span><br>
-                    <span class="sub-caption">R displacement : (36, 108)</span>
-                    <span class="sub-caption">G displacement : (26, 52)</span>
-                </figcaption>
-            </figure>
-            <figure>
-                <img src="../2/sculpture_final.jpg" alt="Sculpture">
-                <figcaption>
-                    <span class="main-caption">Sculpture</span><br>
-                    <span class="sub-caption">R displacement : (-26, 140)</span>
-                    <span class="sub-caption">G displacement : (-10, 34)</span>
-                </figcaption>
-            </figure>
-            <figure>
-                <img src="../2/self_portrait_final.jpg" alt="Self Portrait">
-                <figcaption>
-                    <span class="main-caption">Self Portrait</span><br>
-                    <span class="sub-caption">R displacement : (36, 174)</span>
-                    <span class="sub-caption">G displacement : (30, 80)</span>
-                </figcaption>
-            </figure>
+    <section class="project-section">
+        <h2>1.3 Derivative of Gaussian (DoG) Filter</h2>
+        <p>
+            In this section, I blurred the cameraman image with a Gaussian filter before repeating the process from 1.2. I notice that this time, the gradient appears a little thicker, which allows the final step to capture the edges much better without picking up noise (which kind of goes away due to blurring)
+        </p>
+    </section>
 
+    <section class="project-section">
+        <h2></h2>
+        <div class="image-row">
             <figure>
-                <img src="../2/three_generations_final.jpg" alt="Three Generations">
+                <img src="../2/cameraman_blurred.jpg" alt="Church">
                 <figcaption>
-                    <span class="main-caption">Three Generations</span><br>
-                    <span class="sub-caption">R displacement : (10, 112)</span>
-                    <span class="sub-caption">G displacement : (14, 54)</span>
+                    <span class="main-caption">Blurred Image</span><br>
                 </figcaption>
             </figure>
             <figure>
-                <img src="../2/train_final.jpg" alt="Train">
+                <img src="../2/cameraman_new_gradient_1.jpg" alt="Emir">
                 <figcaption>
-                    <span class="main-caption">Three Generations</span><br>
-                    <span class="sub-caption">R displacement : (32, 88)</span>
-                    <span class="sub-caption">G displacement : (6, 42)</span>
+                    <span class="main-caption">Gradient</span><br>
                 </figcaption>
             </figure>
             <figure>
-                <img src="../2/gundukush_dam_final.jpg" alt="By the Gundukush Dam">
+                <img src="../2/cameraman_new_edges_1.jpg" alt="Harvesters">
                 <figcaption>
-                    <span class="main-caption">By the Gundukush Dam</span><br>
-                    <span class="sub-caption">R displacement : (-60, 132)</span>
-                    <span class="sub-caption">G displacement : (-30, 56)</span>
+                    <span class="main-caption">Edges</span><br>
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="project-section">
+        <p>
+            I then repeated the same process except this time, instead of blurring the image itself with the Gaussian, I convolved the Gaussian itself with Dx and Dy before convoling the image with the Gaussian. This produced the same result. 
+        </p>
+    </section>
+
+    <section class="project-section">
+        <h2></h2>
+        <div class="image-row">
+            <figure>
+                <img src="../2/cameraman_new_gradient_2.jpg" alt="Emir">
+                <figcaption>
+                    <span class="main-caption">Gradient using DoG</span><br>
                 </figcaption>
             </figure>
             <figure>
-                <img src="../2/lugano_final.jpg" alt="Lugano">
+                <img src="../2/cameraman_new_edges_2.jpg" alt="Harvesters">
                 <figcaption>
-                    <span class="main-caption">Lugano</span><br>
-                    <span class="sub-caption">R displacement : (38, 886)</span>
-                    <span class="sub-caption">G displacement : (12, 36)</span>
-                </figcaption>
-            </figure>
-            <figure>
-                <img src="../2/irrigation_canal_final.jpg" alt="Irrigation Canal">
-                <figcaption>
-                    <span class="main-caption">Irrigation Canal</span><br>
-                    <span class="sub-caption">R displacement : (48, 46)</span>
-                    <span class="sub-caption">G displacement : (24, 28)</span>
+                    <span class="main-caption">Edges using DoG</span><br>
                 </figcaption>
             </figure>
         </div>
