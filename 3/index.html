@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="../styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        /* Ensure Section 3 images are scaled down to fit */
+        .image-grid img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        }
+        .image-grid.cols-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        }
+        .image-grid figure {
+        margin: 0;
+        text-align: center;
+        }
+        </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <h1>My Portfolio</h1>
+        <ul class="nav-links">
+            <li><a href="../../index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="#">Projects ▾</a>
+                <div class="dropdown-content">
+                    <a href="../0/index.html">Project 0</a>
+                    <a href="../1/index.html">Project 1</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Project 3</h1>
+    <section class="project-section">
+        <h2>A.1 Shoot the Pictures</h2>
+        <br>
+        <p>
+            For this section, I took pictures at various places in my apartment/apartment building. I didn't have a tripod, so I took the pictures by angle, changing the angle slightly by shifting only one hand a bit forwards or backwards. This helped keep the center of rotation the same. I also didn't rotate too much as to keep a good amount of overlap between images.
+        </p>
+        <div class="image-row">
+            <figure>
+                <img src="../3/left.jpg" alt="Photo 1">
+                <figcaption>
+                    <span class="main-caption">Apartment Left</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../3/middle.jpg" alt="Photo 2">
+                <figcaption>
+                    <span class="main-caption">Apartment Right</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <br>
+        <div class="image-row">
+            <figure>
+                <img src="../3/kitchen_left.jpg" alt="Photo 1">
+                <figcaption>
+                    <span class="main-caption">Kitchen Left</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../3/kitchen_right.jpg" alt="Photo 2">
+                <figcaption>
+                    <span class="main-caption">Kitchen Right</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <br>
+        <div class="image-row">
+            <figure>
+                <img src="../3/room_left.jpg" alt="Photo 1">
+                <figcaption>
+                    <span class="main-caption">Room Left</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../3/room_right.jpg" alt="Photo 2">
+                <figcaption>
+                    <span class="main-caption">Room Right</span><br>
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="project-section">
+        <h2>A.2 Recover Homographies</h2>
+        <p>
+            Given the corresponding pairs of points (x<sub>1</sub>, y<sub>1</sub>) &rarr; (u<sub>1</sub>, v<sub>1</sub>), (x<sub>2</sub>, y<sub>2</sub>) &rarr; (u<sub>2</sub>, v<sub>2</sub>), etc our system of equations will be the following:
+        </p>
+        <p>[x<sub>1</sub>, y<sub>1</sub>, 1, 0, 0, 0, -u<sub>1</sub>·x<sub>1</sub>, -u<sub>1</sub>·y<sub>1</sub>] · h = u<sub>1</sub></p>
+        <p>[0, 0, 0, x<sub>1</sub>, y<sub>1</sub>, 1, -v<sub>1</sub>·x<sub>1</sub>, -v<sub>1</sub>·y<sub>1</sub>] · h = v<sub>1</sub></p>
+        <p>[x<sub>2</sub>, y<sub>2</sub>, 1, 0, 0, 0, -u<sub>2</sub>·x<sub>2</sub>, -u<sub>2</sub>·y<sub>2</sub>] · h = u<sub>2</sub></p>
+        <p>[0, 0, 0, x<sub>2</sub>, y<sub>2</sub>, 1, -v<sub>2</sub>·x<sub>2</sub>, -v<sub>2</sub>·y<sub>2</sub>] · h = v<sub>2</sub></p>
+        <p> etc </p>
+        <br>
+        <p> 
+            Note that each set of corresponding points produces 2 equations in our system!
+        </p>
+        <p>
+            The solution vector h is a row vector with 8 entries, which we turn into a 3 x 3 matrix H (with the last entry as 1). 
+        </p>
+
+    </section>
+
+    <section class="project-section">
+        <h2>Kitchen Images</h2>
+        <div class="image-row">
+            <figure>
+                <img src="../3/kitchen_correspondences.png" alt="kitchen">
+                <figcaption>
+                    <span class="main-caption">Correspondences</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <br>
+        <pre><code>
+            H = [[ 1.46944045e+00 -4.68388132e-02 -7.85573940e+02]
+                 [ 2.02910746e-01  1.26151346e+00 -1.65407285e+02]
+                 [ 2.61304497e-04 -4.40424193e-05  1.00000000e+00]]
+        </code></pre>
+    </section>
+    <section class="project-section">
+        <h2>Kitchen Images</h2>
+        <div class="image-row">
+            <figure>
+                <img src="../3/kitchen_correspondences.png" alt="kitchen">
+                <figcaption>
+                    <span class="main-caption">Correspondences</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <br>
+        <pre><code>
+            H = [[ 1.46944045e+00 -4.68388132e-02 -7.85573940e+02]
+                 [ 2.02910746e-01  1.26151346e+00 -1.65407285e+02]
+                 [ 2.61304497e-04 -4.40424193e-05  1.00000000e+00]]
+        </code></pre>
+    </section>
+
+    <section class="project-section">
+        <h2>A.3 Warp the Images</h2>
+        <br>
+        <h3>Playing Card</h3>
+        <div class="image-grid cols-3">
+            <figure>
+                <img src="../3/card_original.png" alt="card">
+                <figcaption>
+                    <span class="main-caption">Original</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../3/card_nn.png" alt="card">
+                <figcaption>
+                    <span class="main-caption">Nearest Neighbor</span><br>
+                    <span class="sub-caption">Runtime: 8.4s</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../3/card_bil.png" alt="card">
+                <figcaption>
+                    <span class="main-caption">Bilinear</span><br>
+                    <span class="sub-caption">Runtime: 18.2s</span>
+                </figcaption>
+            </figure>
+        </div>
+        <h3>Rug</h3>
+        <div class="image-grid cols-3">
+            <figure>
+                <img src="../3/rug_original.png" alt="rug">
+                <figcaption>
+                    <span class="main-caption">Original</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../3/rug_nn.png" alt="rug">
+                <figcaption>
+                    <span class="main-caption">Nearest Neighbor</span><br>
+                    <span class="sub-caption">Runtime: 8.7s</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../3/rug_bil.png" alt="rug">
+                <figcaption>
+                    <span class="main-caption">Bilinear</span><br>
+                    <span class="sub-caption">Runtime: 18.6s</span>
+                </figcaption>
+            </figure>
+        </div>
+        <br>
+        <p>
+            As far as runtime, Bilinear interpolation is nearly 2 times slower than Nearest Neighbor. 
+            As far as quality, both produce images with very similar qualities, but Bilinear interpolation produces slightly better results. 
+        </p>
+    </section>
+
+    <section class="project-section">
+        <h2>A.4 Blend the Images into a Mosaic</h2>
+        <br>
+        <h3>Kitchen</h3>
+        <div class="image-row">
+            <figure>
+                <img src="../3/kitchen_left.png" alt="Photo 1">
+                <figcaption>
+                    <span class="main-caption">Kitchen Left</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../3/kitchen_right.png" alt="Photo 2">
+                <figcaption>
+                    <span class="main-caption">Kitchen Right</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../3/kitchen_mosaic.png" alt="Photo 2">
+                <figcaption>
+                    <span class="main-caption">Kitchen Mosaic</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <br>
+        <h3>Room</h3>
+        <br>
+        <div class="image-row">
+            <figure>
+                <img src="../3/room_left.png" alt="Photo 1">
+                <figcaption>
+                    <span class="main-caption">Room Left</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../3/room_right.png" alt="Photo 2">
+                <figcaption>
+                    <span class="main-caption">Room Right</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../3/room_mosaic.png" alt="Photo 2">
+                <figcaption>
+                    <span class="main-caption">Room Mosaic</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <br>
+        <h3>Apartment</h3>
+        <br>
+        <div class="image-row">
+            <figure>
+                <img src="../3/left.png" alt="Photo 1">
+                <figcaption>
+                    <span class="main-caption">Apartment Left</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../3/middle.png" alt="Photo 2">
+                <figcaption>
+                    <span class="main-caption">Apartment Right</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../3/apartment_mosaic.png" alt="Photo 2">
+                <figcaption>
+                    <span class="main-caption">Apartment Mosaic</span><br>
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>
