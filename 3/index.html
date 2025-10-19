@@ -134,6 +134,9 @@
     <section class="project-section">
         <h2>A.3 Warp the Images</h2>
         <br>
+        <p>
+            For this section, I implemented image warping 2 ways, using Nearest Neighbors, and using Bilinear Interpolation. For Nearest Neighbors, I found the new positions of pixels in the warped image by rounding to the nearest integers whereas for Bilinear Interpolation, I took a weighted average of the 4 coordinates surrounding the warped pixel based on it's distance to each of them. This results in a smoother looking image, but takes longer to run. 
+        </p>
         <h3>Playing Card</h3>
         <div class="image-grid cols-3">
             <figure>
@@ -190,6 +193,9 @@
     <section class="project-section">
         <h2>A.4 Blend the Images into a Mosaic</h2>
         <br>
+        <p> 
+            Finally, to put all my work together, I placed the warped image and the unchanged image on one canvas to create the final image. To do this I first find the bounds of my output image. Then I place both my images onto the camvas (warping one using Bilinear Interpolation), and create alpha masks for them as well which allows me to blend their borders. 
+        </p>
         <h3>Kitchen</h3>
         <div class="image-row">
             <figure>
@@ -258,6 +264,145 @@
             </figcaption>
         </div>
     </section>
+
+    <section class="project-section">
+        <h2>B.1 Harris Corner Detection</h2>
+        <p>
+            In this section, I defined points of interest in my images using Harris Corner Detection. Using the corner-strength function defined in the paper, we find the local maximum over 3x3 patches across the image. However, this produces a confusing result, so something we can do to refine the output is set a minimum distance between interest points, which ensures we get well-spaced interest points across the entire image. 
+            Then after that, I used Adaptive Non-Maximal Suppression, which filters out the points with lower corner strengths to only give us the strongest interest points. Furthermore, since I had spaced out the interest points earlier, it also gives interest points across the entire image, not just one or a few tight clusters of points. 
+        </p>
+        <br>
+        <div class="image-row">
+            <figure>
+                <img src="../3/3B/left_no_spacing.png" alt="Photo 1">
+                <figcaption>
+                    <span class="main-caption">Apartment Left (No Spacing)</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../3/3B/apartment_left_no_anms.png" alt="Photo 2">
+                <figcaption>
+                    <span class="main-caption">Apartment Left Spaced (No ANMS)</span><br>
+                    <span class="sub-caption">(min_dist = 20)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../3/3B/apartment_left_anms.png" alt="Photo 3">
+                <figcaption>
+                    <span class="main-caption">Apartment Left Spaced (With ANMS)</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <br>
+        <div class="image-row">
+            <figure>
+                <img src="../3/3B/middle_no_spacing.png" alt="Photo 1">
+                <figcaption>
+                    <span class="main-caption">Apartment Middle (No Spacing)</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../3/3B/apartment_middle_no_anms.png" alt="Photo 2">
+                <figcaption>
+                    <span class="main-caption">Apartment Middle Spaced (No ANMS)</span><br>
+                    <span class="sub-caption">(min_dist = 20)</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../3/3B/apartment_middle_anms.png" alt="Photo 3">
+                <figcaption>
+                    <span class="main-caption">Apartment Middle Spaced (With ANMS)</span><br>
+                </figcaption>
+            </figure>
+        </div>
+
+    </section>
+
+    <section class="project-section">
+        <h2>B.2 Feature Descriptor Extraction</h2>
+        <br>
+        <p>
+            Next, we can visualize some of the features from interest points we have gathered. To do this, I randomly selected 8 interest points from the interest points from ANMS and took the 40 x 40 window of pixels around them. Then, I downsampled the patch using cv2.resize to turn it into an 8x8 window. Finally, I normalized, which gives me the following output. 
+        </p>
+        <br>
+        <div class="image-row">
+            <figure>
+                <img src="../3/3B/apartment_descriptors.png" alt="Photo 1">
+                <figcaption>
+                    <span class="main-caption">8 x 8 Feature Descriptors</span><br>
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="project-section">
+        <h2>B.3 Feature Matching</h2>
+        <br>
+        <p>
+            In this section, I now start to put the images together with Feature Matching. This consists of finding pairs of points who's feature descriptors are matching. To do this, I go through every feature I have extracted from B.1 and find it's closest partner in the second image using the Euclidean distance between the descriptors. Then, I use Lowe thresholding to determine if these "closest pairs" are actually matching features. How that works is I find the distances from a point to it's nearest and second nearest point, and confirm whether this point's similarity to it's nearest neighbor is also greater than it's similarity to its second nearest neighbor. If this error ratio is below a certain threshold, then I will keep this pair of points as a correspondence for homography computation.   
+        </p>
+        <br>
+        <div class="image-row">
+            <figure>
+                <img src="../3/3B/apartment_corr_automatic.png" alt="Photo 1">
+                <figcaption>
+                    <span class="main-caption">Apartment Correspondences</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <br>
+        <p>
+            Note, not all these corrresponces are perfect! But this will be fixed in the final step of the algorithm, RANSAC
+        </p>
+    </section>
+
+    <section class="project-section">
+        <h2>B.4 RANSAC for Robust Homography</h2>
+        <br>
+        <p> 
+            For the final step of the algorithm, I implemented RANSAC, which essentially calculates the new Homography matrix using these correspondences, with sampling to get rid of outliers. 
+            The way this works is as follows:
+            1. Randomly select 4 correspondence pairs. 
+            2. Calculate the homography matrix H based on just these points. 
+            3. Go through all the correspondences and calculate the distance between a point in one image transofmred by H, and the correspondence we found from before. If this distance is less than a threshold epsilon, we consider this point an inlier for the homography matrix H. 
+            4. Repeat many times (in my case 2000 times) and keep the homography matrix H which had the largest set of inliers. 
+            5. Finally, compute a new, best, homography matrix using this set of inliers. 
+            Then, using H, I repeated the same process from A.4, warping on of the images and using blending to combine them together. This gave me the following mosaics!
+        </p>
+        <br>
+        <div class="image-row">
+            <figure>
+                <img src="../3/3B/apartment_mosaic_automatic.png" alt="Photo 1">
+                <figcaption>
+                    <span class="main-caption">Apartment Mosaic</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <br>
+        <div class="image-row">
+            <figure>
+                <img src="../3/3B/kitchen_mosaic_automatic.png" alt="Photo 1">
+                <figcaption>
+                    <span class="main-caption">Kitchen Correspondences</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <br>
+        <div class="image-row">
+            <figure>
+                <img src="../3/3B/room_mosaic_automatic.png" alt="Photo 1">
+                <figcaption>
+                    <span class="main-caption">Room Correspondences</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <br>
+        <p>
+            Overall, I found that this method produces less blurry mosaics than my manual process from part A of the project. I think this is because no matter how accurately I try to click on correspondence points, there is always a small amount of human error, so the pairs of points found through this algorithm proved to be much more exact. 
+        </p>
+    </section>  
+
+    
 </main>
 
 </body>
