@@ -327,7 +327,7 @@
         <br>
         <div style="text-align: center;">
             <figure>
-                <img src="../3/3B/apartment_descriptors.png" alt="Photo 1" style="width:500px; height:auto;">
+                <img src="../3/3B/apartment_descriptors.png" alt="Photo 1" style="width:800px; height:auto;">
                 <figcaption>
                     <span class="main-caption">8 x 8 Feature Descriptors</span><br>
                 </figcaption>
@@ -344,7 +344,7 @@
         <br>
         <div style="text-align: center;">
             <figure>
-                <img src="../3/3B/apartment_corr_automatic.png" alt="Photo 1" style="width:500px; height:auto;">
+                <img src="../3/3B/apartment_corr_automatic.png" alt="Photo 1" style="width:800px; height:auto;">
                 <figcaption>
                     <span class="main-caption">Apartment Correspondences</span><br>
                 </figcaption>
@@ -362,11 +362,17 @@
         <p> 
             For the final step of the algorithm, I implemented RANSAC, which essentially calculates the new Homography matrix using these correspondences, with sampling to get rid of outliers. 
             The way this works is as follows:
-            1. Randomly select 4 correspondence pairs. 
+            <br>
+            1. Randomly select 4 correspondence pairs.
+            <br>
             2. Calculate the homography matrix H based on just these points. 
+            <br>
             3. Go through all the correspondences and calculate the distance between a point in one image transofmred by H, and the correspondence we found from before. If this distance is less than a threshold epsilon, we consider this point an inlier for the homography matrix H. 
+            <br>
             4. Repeat many times (in my case 2000 times) and keep the homography matrix H which had the largest set of inliers. 
+            <br>
             5. Finally, compute a new, best, homography matrix using this set of inliers. 
+            <br>
             Then, using H, I repeated the same process from A.4, warping on of the images and using blending to combine them together. This gave me the following mosaics!
         </p>
         <br>
