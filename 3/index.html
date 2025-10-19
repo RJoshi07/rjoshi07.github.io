@@ -325,7 +325,7 @@
             Next, we can visualize some of the features from interest points we have gathered. To do this, I randomly selected 8 interest points from the interest points from ANMS and took the 40 x 40 window of pixels around them. Then, I downsampled the patch using cv2.resize to turn it into an 8x8 window. Finally, I normalized, which gives me the following output. 
         </p>
         <br>
-        <div class="image-row">
+        <div style="text-align: center;">
             <figure>
                 <img src="../3/3B/apartment_descriptors.png" alt="Photo 1">
                 <figcaption>
@@ -342,7 +342,7 @@
             In this section, I now start to put the images together with Feature Matching. This consists of finding pairs of points who's feature descriptors are matching. To do this, I go through every feature I have extracted from B.1 and find it's closest partner in the second image using the Euclidean distance between the descriptors. Then, I use Lowe thresholding to determine if these "closest pairs" are actually matching features. How that works is I find the distances from a point to it's nearest and second nearest point, and confirm whether this point's similarity to it's nearest neighbor is also greater than it's similarity to its second nearest neighbor. If this error ratio is below a certain threshold, then I will keep this pair of points as a correspondence for homography computation.   
         </p>
         <br>
-        <div class="image-row">
+        <div style="text-align: center;">
             <figure>
                 <img src="../3/3B/apartment_corr_automatic.png" alt="Photo 1">
                 <figcaption>
@@ -370,7 +370,7 @@
             Then, using H, I repeated the same process from A.4, warping on of the images and using blending to combine them together. This gave me the following mosaics!
         </p>
         <br>
-        <div class="image-row">
+        <div style="text-align: center;">
             <figure>
                 <img src="../3/3B/apartment_mosaic_automatic.png" alt="Photo 1">
                 <figcaption>
@@ -379,7 +379,7 @@
             </figure>
         </div>
         <br>
-        <div class="image-row">
+        <div style="text-align: center;">
             <figure>
                 <img src="../3/3B/kitchen_mosaic_automatic.png" alt="Photo 1">
                 <figcaption>
@@ -388,7 +388,7 @@
             </figure>
         </div>
         <br>
-        <div class="image-row">
+        <div style="text-align: center;">
             <figure>
                 <img src="../3/3B/room_mosaic_automatic.png" alt="Photo 1">
                 <figcaption>
