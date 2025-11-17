@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="../styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        /* Ensure images are scaled down to fit */
+        .image-grid img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        }
+        .image-grid.cols-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        }
+        .image-grid figure {
+        margin: 0;
+        text-align: center;
+        }
+        /* Stack images vertically for part 0 */
+        .image-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+        margin: 20px 0;
+        }
+        .image-stack figure {
+        max-width: 600px;
+        width: 100%;
+        }
+        .image-stack img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+        }
+        </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <h1>My Portfolio</h1>
+        <ul class="nav-links">
+            <li><a href="../../index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="#">Projects ▾</a>
+                <div class="dropdown-content">
+                    <a href="../0/index.html">Project 0</a>
+                    <a href="../1/index.html">Project 1</a>
+                    <a href="../2/index.html">Project 2</a>
+                    <a href="../3/index.html">Project 3</a>
+                    <a href="../4/index.html">Project 4</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Project 4</h1>
+    
+    <section class="project-section">
+        <h2>part 0: Camera Calibration and 3D Scanning</h2>
+        <p>
+            For this section, I first took a picture of the ArUco tags and used them to calibrate my camera. I then used the camera calibration to scan the 3D model of the monster.
+            Here are a couple examples of the images I took of the ArUco tags and of the monster.
+        </p>
+
+        <div class="image-stack">
+            <figure>
+                <img src="4/tags/IMG_0301.jpg" alt="Image 2">
+            </figure>
+            <figure>
+                <img src="4/monster/IMG_0409.jpg" alt="Image 1">
+            </figure>
+        </div>
+
+        <p>
+            Next, I found my camera's extrinsic parameters using the pairs of 3D and their corresponding 2D points. 
+            The following two images are different angles of the visualization of the camera's poses for each picture. 
+        </p>
+        
+        <div class="image-stack">
+            <figure>
+                <img src="4/part_0_img_1.png" alt="Image 1">
+            </figure>
+            <figure>
+                <img src="4/part_0_img_2.png" alt="Image 2">
+            </figure>
+        </div>
+        
+    </section>
+
+
+    <section class="project-section">
+        <h2>Part 1: Fit a Neural Field to a 2D Image</h2>
+        <p>
+            In this section, I created an MLP network using the structure provided in the spec. My MLP had a width of 256 in this initial runthrough. 
+            I also implemented Sinusoidal Positional Encoding, using a highest frequency level (L) of 10 and applied it to all my datapoints (2d coordinates) 
+            To make training faster, I also sampled coordinates from the image and normalized them. The following are the reconstructed images of the fox along witht he PSNR training curve. 
+        </p>
+
+        <div class="image-stack">
+            <figure>
+                <img src="4/fox_0.png" alt="Image 2">
+            </figure>
+            <figure>
+                <img src="4/fox_500.png" alt="Image 1">
+            </figure>
+            <figure>
+                <img src="4/fox_1000.png" alt="Image 2">
+            </figure>
+            <figure>
+                <img src="4/fox_1500.png" alt="Image 1">
+            </figure>
+            <figure>
+                <img src="4/fox_final.png" alt="Image 1">
+            </figure>
+            <figure>
+                <img src="4/psnr_part_1.png" alt="Image 1">
+            </figure>
+        </div>
+
+        <p>
+            I also experiemented with hyperparameters. Here are two images of training with L = 10 vs L = 5 (channel size = 256) on a picture of my friend's cat Peter!
+        </p>
+        <div class="image-row">
+            <figure>
+                <img src="4/peter_L=10.png" alt="Image 2">
+            </figure>
+            <figure>
+                <img src="4/peter_L=5.png" alt="Image 2">
+            </figure>
+        </div>
+
+        <p>
+            Here is a comparison of training with width = 256 vs width = 64 (L = 10) on the same image. 
+        </p>
+
+        <div class="image-row">
+            <figure>
+                <img src="4/peter_L=10.png" alt="Image 2">
+            </figure>
+            <figure>
+                <img src="4/peter_width=.png" alt="Image 2">
+            </figure>
+        </div>
+    </section>
+
+
+    <section class="project-section">
+        <h2>Part 2: Fit a Neural Radiance Field from Multi-view Images</h2>
+        <p>
+            2.1
+        </p>
+        <br>
+        <p>
+            In this part, I implemented 3 functions. The first, transform, takes in a camera space coordinate and transforms it into a world space coordinate using the given c2w matrix. 
+            I also implemented pixel_to_camera, which uses the intrinsic matrix of a camera and a pixel in the image to return the original coordinate in the camera's coordinate system. 
+            Finally, I implemented pixel_to_ray, wich uses pixel_to_camera and then calculates the r_o and r_d (original and direction vectors) for that point in camera space. 
+        </p>
+
+        <br>
+
+        <p>
+            2.2 + 2.3
+        </p>
+        <br>
+        <p>
+            For these parts, I implemented the RaysData class, which handles converting all the pixels into rays. I implemented the sampling described in 2.2 as a part of this class, creating functions which samples rays from images and samples the points across rays. 
+            Then I put it all together! I ran the code provided in the spec and produced visualiations of the rays from the camera given by the lego dataset. I produced the following visualization
+        </p>
+
+        <div class="image-stack">
+            <figure>
+                <img src="4/lego_vis.png" alt="Image 2">
+            </figure>
+        </div>
+
+        <br>
+
+        <p>
+            2.4
+        </p>
+        <br>
+        <p>
+            In this section, I implemented the MLP for 3D samples. I followed the structure provided in the spec, creating a deeper model class called NeRF. 
+            My inputs are a 3D world coordinate along with a 3D vector for our ray direction. In this MLP, I produce a color as well as a density, since we are now in 3D. To do this, I split my NN into 2 paths to produce 2 outputs. 
+            However, I only need the direction vector to produce color (it has no effect on density), so I only add it as an input to that specific path. This is done through concatenation. 
+        </p>
+
+        <div class="image-stack">
+            <figure>
+                <img src="4/mlp_nerf.png" alt="Image 2">
+            </figure>
+        </div>
+
+        <br>
+        <p>
+            2.5
+        </p>
+        <br>
+        <p>
+            Finally, for 2.5, I first implemented volume rendering, which takes in the colors and densities and creates a rendering of the image with that data. Then, I took the data from the lego dataset and trained it on the NeRF model. 
+            I also calculated the MSE and PSNR values at each iteration, and the PSNR on the validation set every 200 iterations. Then, at the end, I used my volrend function to produce a spherical rendering of the lego from multiple camera angles. 
+            Below are some renderings of the lego throughout training, the PSNR curve for training and validation, as well as the final gif rendering post-training. 
+        </p>
+
+        <div class="image-stack">
+            <figure>
+                <img src="4/snapshots.png" alt="Image 2">
+            </figure>
+        </div>
+        <div class="image-row">
+            <figure>
+                <img src="4/training_psnr.png" alt="Image 2">
+            </figure>
+            <figure>
+                <img src="4/validation_psnr.png" alt="Image 2">
+            </figure>
+        </div>
+        <div class="image-stack">
+            <figure>
+                <img src="4/lego_spherical.gif" alt="Image 2">
+            </figure>
+        </div>
+        <br>
+
+        <p>
+            2.6
+        </p>
+        <br>
+        <p>
+            In this section, I repeated the same process with my own images of the monster I took in part 0. I ran it with the same code as before and made no alterations to the hyperparameters. Unfortunately, I was not able to achieve a strong rendering 
+        </p>
+
+        <div class="image-stack">
+            <figure>
+                <img src="4/monster_snapshots.png" alt="Image 2">
+            </figure>
+        </div>
+        <div class="image-stack">
+            <figure>
+                <img src="4/monster_spherical.png" alt="Image 2">
+            </figure>
+        </div>
+        
+
+
+    </section>
+</main>
+
+</body>
+</html>
+
