@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="../styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        /* Ensure images are scaled down to fit */
+        .image-grid img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        }
+        .image-grid.cols-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        }
+        .image-grid figure {
+        margin: 0;
+        text-align: center;
+        }
+        .image-row {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        }
+        .image-row figure {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 220px;
+        text-align: center;
+        }
+        .image-row img {
+        width: 200px;
+        height: auto;
+        border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <h1>My Portfolio</h1>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="#">Projects ▾</a>
+                <div class="dropdown-content">
+                    <a href="../0/index.html">Project 0</a>
+                    <a href="../1/index.html">Project 1</a>
+                    <a href="../2/index.html">Project 2</a>
+                    <a href="../3/index.html">Project 3</a>
+                    <a href="../4/index.html">Project 4</a>
+                    <a href="../5/index.html">Project 5</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Project 5</h1>
+    
+    <section class="project-section">
+        <h2>5A</h2>
+        
+        <h3>Part 0</h3>
+        <p>
+            <!-- Add your paragraph here -->
+        </p>
+        For this section, I generated images using the Huggingface model. Here is the images I used with their correcponding prompts with the number of inferencing steps is 20. 
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.0/civilization_20.png" alt="Civilization 20">
+                <figcaption>
+                    <span class="main-caption">An Ancient Civilization</span><br>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.0/prompts_num_iter_20.png" alt="Prompts Num Iter 20">
+                <figcaption>
+                    <span class="main-caption">A Cat Curled Up By the Fireplace</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.0/withered_20.png" alt="Withered 20">
+                <figcaption>
+                    <span class="main-caption">A Withered Photograph</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <p> 
+            I also experimented with the number of inferencing steps. Here are the images I generated with 40 inferencing steps. I noticed that these images are somewhat more detailed, and the colors are also much more vibrant. 
+        </p>
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.0/civilization_40.png" alt="Civilization 40">
+                <figcaption>
+                    <span class="main-caption">An Ancient Civilization</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.0/cat_40.png" alt="Cat 40">
+                <figcaption>
+                    <span class="main-caption">A Cat Curled Up By the Fireplace</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.0/withered_40.png" alt="Withered 40">
+                <figcaption>
+                    <span class="main-caption">A Withered Photograph</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            
+        </div>
+
+        <p>
+            For the ancient civilization image, the second version actually looked less realistic and more like abstract art, which I found interesting. For the other 2, I found that the 40 step images were more realistic, and I found it insteresting the way the model interpreted the prompt "a withered photograph", as both images were quite different. 
+        </p>
+
+        <h3>Part 1.1</h3>
+        <p>
+            In this part, I implemented the noising process, adding more and more noise to the original image of the campanile. 
+        </p>
+        <div style="text-align: center; margin: 20px 0;">
+            <figure>
+                <img src="5a/5a.1.1/campanile.png" alt="Campanile" style="max-width: 600px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">Original Image</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.1/t=250.png" alt="t=250">
+                <figcaption>
+                    <span class="main-caption">t=250</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.1/t=500.png" alt="t=500">
+                <figcaption>
+                    <span class="main-caption">t=500</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.1/t=750.png" alt="t=750">
+                <figcaption>
+                    <span class="main-caption">t=750</span><br>
+                </figcaption>
+            </figure>
+        </div>
+
+        <h3>Part 1.2</h3>
+        <p>
+            In this section, I used the noisy images from the previous part and attempted to "denoise" them with Gaussian Blurring. As the noise level became higher, I used larger and larger kernel sizes (5, 9, 11), to try and help the image look less noisy. 
+        </p>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.1/t=250.png" alt="t=250">
+                <figcaption>
+                    <span class="main-caption">Noisy t=250</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.1/t=500.png" alt="t=500">
+                <figcaption>
+                    <span class="main-caption">Noisy t=500</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.1/t=750.png" alt="t=750">
+                <figcaption>
+                    <span class="main-caption">Noisy t=750</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.2/blurred_250.png" alt="blurred_250">
+                <figcaption>
+                    <span class="main-caption">Blurred t=250</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.2/blurred_500.png" alt="blurred_500">
+                <figcaption>
+                    <span class="main-caption">Blurred t=500</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.2/blurred_750.png" alt="blurred_750">
+                <figcaption>
+                    <span class="main-caption">Blurred t=750</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <h3>Part 1.3</h3>
+        <p>
+            In this section, I used one step denoising to denoise the images, using the unet with the prompt "a high quality photo". Here are the results I got for the same noise levels as the previous parts. 
+        </p>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.1/t=250.png" alt="t=250">
+                <figcaption>
+                    <span class="main-caption">Noisy t=250</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.1/t=500.png" alt="t=500">
+                <figcaption>
+                    <span class="main-caption">Noisy t=500</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.1/t=750.png" alt="t=750">
+                <figcaption>
+                    <span class="main-caption">Noisy t=750</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.3/denoised_250.png" alt="denoised_250">
+                <figcaption>
+                    <span class="main-caption">Denoised t=250</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.3/denoised_500.png" alt="denoised_500">
+                <figcaption>
+                    <span class="main-caption">Denoised t=500</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.3/denoised_750.png" alt="denoised_750">
+                <figcaption>
+                    <span class="main-caption">Denoised t=750</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <h3>Part 1.4</h3>
+        <p>
+            In this section, I implemented the iterative denoising process. Here, the results from this process look a lot better than 1.3, because it appears more detailed. 
+            And both of the denoising algorithms do a better job than Gaussian Blurring, as that doesn't actually get rid of the noise itself, it just softens it. 
+        </p>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.4/t=90.png" alt="t=90">
+                <figcaption>
+                    <span class="main-caption">Noisy t=90</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.4/t=240.png" alt="t=240">
+                <figcaption>
+                    <span class="main-caption">Noisy t=240</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.4/t=390.png" alt="t=390">
+                <figcaption>
+                    <span class="main-caption">Noisy t=390</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.4/t=540.png" alt="t=540">
+                <figcaption>
+                    <span class="main-caption">Noisy t=540</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.4/t=690.png" alt="t=690">
+                <figcaption>
+                    <span class="main-caption">Noisy t=690</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.1/campanile.png" alt="Campanile" style="max-width: 200px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">Original Campanile</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.4/clean_one_step.png" alt="clean_one_step">
+                <figcaption>
+                    <span class="main-caption">One Step Denoised</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.4/final.png" alt="final">
+                <figcaption>
+                    <span class="main-caption">Final Iteratively Denoised</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.4/blur_filtered.png" alt="blur_filtered">
+                <figcaption>
+                    <span class="main-caption">Gaussian Blurred</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <h3>Part 1.5</h3>
+        <p>
+            In this part, I used the same algorithm as 1.4, but instead of calling it on a noisy campanile, I called it on an image of pure noise. It was interesting to see the wide variety of results. 
+            Again, this was passed into the unet using the prompt "a high quality photo"
+        </p>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.5/sample_1.png" alt="sample_1">
+                <figcaption>
+                    <span class="main-caption">Sample 1</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>   
+            </figure>
+            <figure>
+                <img src="5a/5a.1.5/sample_2.png" alt="sample_2">
+                <figcaption>
+                    <span class="main-caption">Sample 2</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.5/sample_3.png" alt="sample_3">
+                <figcaption>
+                    <span class="main-caption">Sample 3</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.5/sample_4.png" alt="sample_4">
+                <figcaption>
+                    <span class="main-caption">Sample 4</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.5/sample_5.png" alt="sample_5">
+                <figcaption>
+                    <span class="main-caption">Sample 5</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <h3>Part 1.6</h3>
+        <p>
+            For 1.6, I repeated the same thing from 1.5, expect not I implemented denoising with Classifier-Free Guidance, or CFG. For this, I compute the noise estimate, both conditioned on a text-prompt ("a high quality photo") and without a text-prompt, and take something like a weighted average of the 2. 
+            There were my results! These images look a lot better in terms of quality and also appear more vibrant, which is cool. 
+        </p>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.6/sample_1.png" alt="sample_1">
+                <figcaption>
+                    <span class="main-caption">Sample 1</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.6/sample_2.png" alt="sample_2">
+                <figcaption>
+                    <span class="main-caption">Sample 2</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.6/sample_3.png" alt="sample_3">
+                <figcaption>
+                    <span class="main-caption">Sample 3</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.6/sample_4.png" alt="sample_4">
+                <figcaption>
+                    <span class="main-caption">Sample 4</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.6/sample_5.png" alt="sample_5">
+                <figcaption>
+                    <span class="main-caption">Sample 5</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <h3>Part 1.7</h3>
+        <p>
+            In this section, I run the same algorithm, except now I use a strating image, which I add noise to and then denoise with CFG. This gives me "edited" versions of the original image, which get closer to it as the starting index i gets higher. 
+            These are the results on the original Campanile image, a picture of coffee from 1951, and my friend's cat Peter!
+        </p>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.7/campanile/level=1.png" alt="level=1">
+                <figcaption>
+                    <span class="main-caption">i_start=1</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/campanile/level=3.png" alt="level=3">
+                <figcaption>
+                    <span class="main-caption">i_start=3</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/campanile/level=5.png" alt="level=5">
+                <figcaption>
+                    <span class="main-caption">i_start=5</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/campanile/level=7.png" alt="level=7">
+                <figcaption>
+                    <span class="main-caption">i_start=7</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/campanile/level=10.png" alt="level=10">
+                <figcaption>
+                    <span class="main-caption">i_start=10</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/campanile/level=20.png" alt="level=20">
+                <figcaption>
+                    <span class="main-caption">i_start=20</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.1/campanile.png" alt="Campanile Original" style="max-width: 200px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">Original Campanile</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.7/coffee/level=1.png" alt="level=1">
+                <figcaption>
+                    <span class="main-caption">i_start=1</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/coffee/level=3.png" alt="level=3">
+                <figcaption>
+                    <span class="main-caption">i_start=3</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/coffee/level=5.png" alt="level=5">
+                <figcaption>
+                    <span class="main-caption">i_start=5</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/coffee/level=7.png" alt="level=7">
+                <figcaption>
+                    <span class="main-caption">i_start=7</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/coffee/level=10.png" alt="level=10">
+                <figcaption>
+                    <span class="main-caption">i_start=10</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/coffee/level=20.png" alt="level=20">
+                <figcaption>
+                    <span class="main-caption">i_start=20</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/coffee/coffee.png" alt="Coffee Original" style="max-width: 200px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">Original Coffee</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.7/peter/level=1.png" alt="level=1">
+                <figcaption>
+                    <span class="main-caption">i_start=1</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/peter/level=3.png" alt="level=3">
+                <figcaption>
+                    <span class="main-caption">i_start=3</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/peter/level=5.png" alt="level=5">
+                <figcaption>
+                    <span class="main-caption">i_start=5</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/peter/level=7.png" alt="level=7">
+                <figcaption>
+                    <span class="main-caption">i_start=7</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/peter/level=10.png" alt="level=10">
+                <figcaption>
+                    <span class="main-caption">i_start=10</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/peter/level=20.png" alt="level=20">
+                <figcaption>
+                    <span class="main-caption">i_start=20</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/peter/peter.png" alt="Peter Original" style="max-width: 200px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">Original Cat</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <h3>Part 1.7.1</h3>
+        <p>
+            Here I did the same thing as 1.7, but with some other images. The first 2 examples are images I hand drew. The first image was meant to be a bag, but I guess the model interpreted it as more of a penguin, and as the i_start gets smaller, it even strays away from that. 
+            The second image of a cat was somewhat recognized. 
+            Then, for the last example, I used an image of Snoopy from the web. 
+        </p>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.7.1/bag_drawing/bag_1.png" alt="bag_1">
+                <figcaption>
+                    <span class="main-caption">i_start=1</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/bag_drawing/bag_3.png" alt="bag_3">
+                <figcaption>
+                    <span class="main-caption">i_start=3</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/bag_drawing/bag_5.png" alt="bag_5">
+                <figcaption>
+                    <span class="main-caption">i_start=5</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/bag_drawing/bag_7.png" alt="bag_7">
+                <figcaption>
+                    <span class="main-caption">i_start=7</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/bag_drawing/bag_10.png" alt="bag_10">
+                <figcaption>
+                    <span class="main-caption">i_start=10</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/bag_drawing/bag_20.png" alt="bag_20">
+                <figcaption>
+                    <span class="main-caption">i_start=20</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/bag_drawing/bag_drawing.png" alt="Bag Drawing Original" style="max-width: 200px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">Original Bag Drawing</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.7.1/cat_drawing/cat_1.png" alt="cat_1">
+                <figcaption>
+                    <span class="main-caption">i_start=1</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/cat_drawing/cat_3.png" alt="cat_3">
+                <figcaption>
+                    <span class="main-caption">i_start=3</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/cat_drawing/cat_5.png" alt="cat_5">
+                <figcaption>
+                    <span class="main-caption">i_start=5</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/cat_drawing/cat_7.png" alt="cat_7">
+                <figcaption>
+                    <span class="main-caption">i_start=7</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/cat_drawing/cat_10.png" alt="cat_10">
+                <figcaption>
+                    <span class="main-caption">i_start=10</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/cat_drawing/cat_20.png" alt="cat_20">
+                <figcaption>
+                    <span class="main-caption">i_start=20</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/cat_drawing/cat_original.png" alt="Cat Drawing Original" style="max-width: 200px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">Original Cat Drawing</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.7.1/snoopy_web/snoopy_1.png" alt="snoopy_1">
+                <figcaption>
+                    <span class="main-caption">i_start=1</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/snoopy_web/snoopy_3.png" alt="snoopy_3">
+                <figcaption>
+                    <span class="main-caption">i_start=3</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/snoopy_web/snoopy_5.png" alt="snoopy_5">
+                <figcaption>
+                    <span class="main-caption">i_start=5</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/snoopy_web/snoopy_7.png" alt="snoopy_7">
+                <figcaption>
+                    <span class="main-caption">i_start=7</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/snoopy_web/snoopy_10.png" alt="snoopy_10">
+                <figcaption>
+                    <span class="main-caption">i_start=10</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/snoopy_web/snoopy_20.png" alt="snoopy_20">
+                <figcaption>
+                    <span class="main-caption">i_start=20</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.1/snoopy_web/original.png" alt="Snoopy Web Original" style="max-width: 200px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">Original Snoopy</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <h3>Part 1.7.2</h3>
+        <p>
+            Now, for this section, I added inpainting! To do that, I used a mask for each image, and ran the same diffusion denoising loop on everything inside of the mask. 
+        </p>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.7.2/campanile/original.png" alt="campanile_original">
+                <figcaption>
+                    <span class="main-caption">Original</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.2/campanile/mask.png" alt="campanile_mask">
+                <figcaption>
+                    <span class="main-caption">Mask</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.2/campanile/to_replace.png" alt="campanile_to_replace">
+                <figcaption>
+                    <span class="main-caption">To Replace</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.2/campanile/inpainted.png" alt="campanile_inpainted">
+                <figcaption>
+                    <span class="main-caption">Inpainted</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.7.2/coffee/original.png" alt="coffee_original">
+                <figcaption>
+                    <span class="main-caption">Original</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.2/coffee/mask.png" alt="coffee_mask">
+                <figcaption>
+                    <span class="main-caption">Mask</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.2/coffee/to_replace.png" alt="coffee_to_replace">
+                <figcaption>
+                    <span class="main-caption">To Replace</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.2/coffee/inpainted.png" alt="coffee_inpainted">
+                <figcaption>
+                    <span class="main-caption">Inpainted</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.7.2/peter/original.png" alt="peter_original">
+                <figcaption>
+                    <span class="main-caption">Original</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.2/peter/mask.png" alt="peter_mask">
+                <figcaption>
+                    <span class="main-caption">Mask</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.2/peter/to_replace.png" alt="peter_to_replace">
+                <figcaption>
+                    <span class="main-caption">To Replace</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.2/peter/inpainted.png" alt="peter_inpainted">
+                <figcaption>
+                    <span class="main-caption">Inpainted</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <h3>Part 1.7.3</h3>
+        <p>
+            In this section, I used the same algorithm as before, but with a different prompt! For the Campanile image, I used "a man wearing a cat". 
+            For the coffee, I used my own prompt of "a cake". And finally, for the picture of the cat, I used the prompt "a dog". 
+        </p>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.7.3/campanile_hat/t=1.png" alt="t=1">
+                <figcaption>
+                    <span class="main-caption">i_start=1</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.3/campanile_hat/t=3.png" alt="t=3">
+                <figcaption>
+                    <span class="main-caption">i_start=3</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.3/campanile_hat/t=5.png" alt="t=5">
+                <figcaption>
+                    <span class="main-caption">i_start=5</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.3/campanile_hat/t=7.png" alt="t=7">
+                <figcaption>
+                    <span class="main-caption">i_start=7</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.3/campanile_hat/t=10.png" alt="t=10">
+                <figcaption>
+                    <span class="main-caption">i_start=10</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.3/campanile_hat/t=20.png" alt="t=20">
+                <figcaption>
+                    <span class="main-caption">i_start=20</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.1/campanile.png" alt="Campanile Original" style="max-width: 200px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">Original Campanile</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.7.3/cake_coffee/t=1.png" alt="t=1">
+                <figcaption>
+                    <span class="main-caption">i_start=1</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.3/cake_coffee/t=3.png" alt="t=3">
+                <figcaption>
+                    <span class="main-caption">i_start=3</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.3/cake_coffee/t=5.png" alt="t=5">
+                <figcaption>
+                    <span class="main-caption">i_start=5</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.3/cake_coffee/t=7.png" alt="t=7">
+                <figcaption>
+                    <span class="main-caption">i_start=7</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.3/cake_coffee/t=10.png" alt="t=10">
+                <figcaption>
+                    <span class="main-caption">i_start=10</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.3/cake_coffee/t=20.png" alt="t=20">
+                <figcaption>
+                    <span class="main-caption">i_start=20</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/coffee/coffee.png" alt="Coffee Original" style="max-width: 200px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">Original Coffee</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.7.3/cat_dog/t=1.png" alt="t=1">
+                <figcaption>
+                    <span class="main-caption">i_start=1</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.3/cat_dog/t=3.png" alt="t=3">
+                <figcaption>
+                    <span class="main-caption">i_start=3</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.3/cat_dog/t=5.png" alt="t=5">
+                <figcaption>
+                    <span class="main-caption">i_start=5</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.3/cat_dog/t=7.png" alt="t=7">
+                <figcaption>
+                    <span class="main-caption">i_start=7</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.3/cat_dog/t=10.png" alt="t=10">
+                <figcaption>
+                    <span class="main-caption">i_start=10</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7.3/cat_dog/t=20.png" alt="t=20">
+                <figcaption>
+                    <span class="main-caption">i_start=20</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.7/peter/peter.png" alt="Peter Original" style="max-width: 200px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">Original Cat</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <h3>Part 1.8</h3>
+        <p>
+           For 1.8, I used the same iterative denoising function with cfg as before, but now with a twist. I applied the algorthm to 2 seperate prompts, and for one of the prompts, I called it on the flipped version of an image, and flipped the result of that. Then I took the average of the 2 images. This gave me an image which was one prompt rightside up and another upside down. 
+           The first example was for the prompts "a skyscraper" and "a tall tree". The second for "a sketch of a cup coffee" and "a sketch of an island in the middle of the ocean". I had to run the algorithm as few times to produce good resulrs for these, as to allow the model to train and get better. 
+        </p>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.8/coffee_island.png" alt="coffee_island" style="max-width: 400px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">coffee_island</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.8/tree_skyscraper.png" alt="tree_skyscraper" style="max-width: 400px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">tree_skyscraper</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <h3>Part 1.9</h3>
+        <p>
+            And finally, for 1.9, I used the same algorithm once again. This time, like 1.8, I called it for 2 seperate prompts, but the difference was I combined them both rightside up, just using the high-pass version of one of the images and the low-pass version of the second. To achieve a good balance between both the images, I played around with the size of my kernel for filtering, until I was able to somewhat see both elements of the prompts in the image. 
+            The first combines "a cake" and "a hat" and the second combines "a house" with "a painting of a face"
+        </p>
+
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.9/cake_hat.png" alt="cake_hat" style="max-width: 400px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">cake_hat</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.9/house_face.png" alt="house_face" style="max-width: 400px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">house_face</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+    </section>
+
+    <section class="project-section">
+        <h2>5B</h2>
+        
+        <h3>Part 1.2</h3>
+        <p>
+           In this section, I visualized different noise levels (seen in the captions below)
+        </p>
+
+        <div class="image-row">
+            <figure>
+                <img src="5b/5b.1.2/noise=0.png" alt="noise=0">
+                <figcaption>
+                    <span class="main-caption">noise=0</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2/noise=0.2.png" alt="noise=0.2">
+                <figcaption>
+                    <span class="main-caption">noise=0.2</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2/noise=0.4.png" alt="noise=0.4">
+                <figcaption>
+                    <span class="main-caption">noise=0.4</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2/noise=0.5.png" alt="noise=0.5">
+                <figcaption>
+                    <span class="main-caption">noise=0.5</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2/noise=0.6.png" alt="noise=0.6">
+                <figcaption>
+                    <span class="main-caption">noise=0.6</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2/noise-0.8.png" alt="noise=0.8">
+                <figcaption>
+                    <span class="main-caption">noise=0.8</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2/noise=1.png" alt="noise=1">
+                <figcaption>
+                    <span class="main-caption">noise=1</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <h3>Part 1.2.1</h3>
+        <p>
+            <!-- Add your paragraph here -->
+        </p>
+
+        <h4>Epoch 1</h4>
+        <div class="image-row">
+            <figure>
+                <img src="5b/5b.1.2.1/sample1_original.png" alt="sample1_original">
+                <figcaption>
+                    <span class="main-caption">Sample 1 Original</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2.1/sample1_noise.png" alt="sample1_noise">
+                <figcaption>
+                    <span class="main-caption">Sample 1 Noise</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2.1/sample1_denoised.png" alt="sample1_denoised">
+                <figcaption>
+                    <span class="main-caption">Sample 1 Denoised</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2.1/sample2_original.png" alt="sample2_original">
+                <figcaption>
+                    <span class="main-caption">Sample 2 Original</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2.1/sample2_noise.png" alt="sample2_noise">
+                <figcaption>
+                    <span class="main-caption">Sample 2 Noise</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2.1/sample2_denoised.png" alt="sample2_denoised">
+                <figcaption>
+                    <span class="main-caption">Sample 2 Denoised</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2.1/sample3_original.png" alt="sample3_original">
+                <figcaption>
+                    <span class="main-caption">Sample 3 Original</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2.1/sample3_noise.png" alt="sample3_noise">
+                <figcaption>
+                    <span class="main-caption">Sample 3 Noise</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2.1/sample3_denoised.png" alt="sample3_denoised">
+                <figcaption>
+                    <span class="main-caption">Sample 3 Denoised</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <h4>Epoch 2</h4>
+        <div class="image-row">
+            <figure>
+                <img src="5b/5b.1.2.1/sample4_original.png" alt="sample4_original">
+                <figcaption>
+                    <span class="main-caption">Sample 4 Original</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2.1/sample4_noise.png" alt="sample4_noise">
+                <figcaption>
+                    <span class="main-caption">Sample 4 Noise</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2.1/sample4_denoised.png" alt="sample4_denoised">
+                <figcaption>
+                    <span class="main-caption">Sample 4 Denoised</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2.1/sample5_original.png" alt="sample5_original">
+                <figcaption>
+                    <span class="main-caption">Sample 5 Original</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2.1/sample5_noise.png" alt="sample5_noise">
+                <figcaption>
+                    <span class="main-caption">Sample 5 Noise</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2.1/sample5_denoised.png" alt="sample5_denoised">
+                <figcaption>
+                    <span class="main-caption">Sample 5 Denoised</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2.1/sample6_original.png" alt="sample6_original">
+                <figcaption>
+                    <span class="main-caption">Sample 6 Original</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2.1/sample6_noise.png" alt="sample6_noise">
+                <figcaption>
+                    <span class="main-caption">Sample 6 Noise</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5b/5b.1.2.1/sample6_denoised.png" alt="sample6_denoised">
+                <figcaption>
+                    <span class="main-caption">Sample 6 Denoised</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>
+
