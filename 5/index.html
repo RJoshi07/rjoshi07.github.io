@@ -73,9 +73,11 @@
         
         <h3>Part 0</h3>
         <p>
-            <!-- Add your paragraph here -->
+            <b>The random seed I generated for this project is 107</b>
         </p>
-        For this section, I generated images using the Huggingface model. Here is the images I used with their correcponding prompts with the number of inferencing steps is 20. 
+        <p>
+            For this section, I generated images using the Huggingface model. Here is the images I used with their correcponding prompts with the number of inferencing steps is 20. 
+        </p>
 
         <div class="image-row">
             <figure>
@@ -132,13 +134,15 @@
             For the ancient civilization image, the second version actually looked less realistic and more like abstract art, which I found interesting. For the other 2, I found that the 40 step images were more realistic, and I found it insteresting the way the model interpreted the prompt "a withered photograph", as both images were quite different. 
         </p>
 
-        <h3>Part 1.1</h3>
+        <br>
+
+        <h3>Part 1.1 Implementing the Forward Process</h3>
         <p>
             In this part, I implemented the noising process, adding more and more noise to the original image of the campanile. 
         </p>
         <div style="text-align: center; margin: 20px 0;">
             <figure>
-                <img src="5a/5a.1.1/campanile.png" alt="Campanile" style="max-width: 600px; height: auto;">
+                <img src="5a/5a.1.1/campanile.png" alt="Campanile" style="width: 200px; height: auto;">
                 <figcaption>
                     <span class="main-caption">Original Image</span><br>
                 </figcaption>
@@ -166,8 +170,9 @@
                 </figcaption>
             </figure>
         </div>
+        <br>
 
-        <h3>Part 1.2</h3>
+        <h3>Part 1.2 Classical Denoising</h3>
         <p>
             In this section, I used the noisy images from the previous part and attempted to "denoise" them with Gaussian Blurring. As the noise level became higher, I used larger and larger kernel sizes (5, 9, 11), to try and help the image look less noisy. 
         </p>
@@ -219,11 +224,21 @@
                 </figcaption>
             </figure>
         </div>
+        <br>
 
-        <h3>Part 1.3</h3>
+        <h3>Part 1.3 One-Step Denoising</h3>
         <p>
-            In this section, I used one step denoising to denoise the images, using the unet with the prompt "a high quality photo". Here are the results I got for the same noise levels as the previous parts. 
+            In this section, I used one step denoising to denoise the images from 1.1, using the unet with the prompt "a high quality photo". Here are the results I got for the same noise levels as the previous parts. 
         </p>
+
+        <div style="text-align: center; margin: 20px 0;">
+            <figure>
+                <img src="5a/5a.1.1/campanile.png" alt="Campanile" style="width: 200px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">Original Image</span><br>
+                </figcaption>
+            </figure>
+        </div>
 
         <div class="image-row">
             <figure>
@@ -272,11 +287,13 @@
                 </figcaption>
             </figure>
         </div>
+        <br>
 
         <h3>Part 1.4</h3>
         <p>
-            In this section, I implemented the iterative denoising process. Here, the results from this process look a lot better than 1.3, because it appears more detailed. 
+            In this section, I implemented the iterative denoising process. Shown below, the results from this process look a lot better than 1.3, because it appears more detailed. 
             And both of the denoising algorithms do a better job than Gaussian Blurring, as that doesn't actually get rid of the noise itself, it just softens it. 
+            The results shown below are after every 5 iterations of denoising, and below that, the original image compared to all 3 denoising methods. 
         </p>
 
         <div class="image-row">
@@ -335,7 +352,7 @@
             <figure>
                 <img src="5a/5a.1.4/final.png" alt="final">
                 <figcaption>
-                    <span class="main-caption">Final Iteratively Denoised</span><br>
+                    <span class="main-caption">Iteratively Denoised</span><br>
                     <!-- Add your caption here -->
                 </figcaption>
             </figure>
@@ -347,6 +364,7 @@
                 </figcaption>
             </figure>
         </div>
+        <br>
 
         <h3>Part 1.5</h3>
         <p>
@@ -392,10 +410,12 @@
             </figure>
         </div>
 
+        <br>
+
         <h3>Part 1.6</h3>
         <p>
-            For 1.6, I repeated the same thing from 1.5, expect not I implemented denoising with Classifier-Free Guidance, or CFG. For this, I compute the noise estimate, both conditioned on a text-prompt ("a high quality photo") and without a text-prompt, and take something like a weighted average of the 2. 
-            There were my results! These images look a lot better in terms of quality and also appear more vibrant, which is cool. 
+            For 1.6, I repeated the same thing from 1.5, expect this time I implemented denoising with Classifier-Free Guidance, or CFG. For this, I computed the noise estimate, both conditioned on a text-prompt ("a high quality photo") and without a text-prompt, and took something like a weighted average of the 2. 
+            There were my results! These images look a lot better in terms of quality and also appear more vibrant. 
         </p>
 
         <div class="image-row">
@@ -438,9 +458,10 @@
 
         <h3>Part 1.7</h3>
         <p>
-            In this section, I run the same algorithm, except now I use a strating image, which I add noise to and then denoise with CFG. This gives me "edited" versions of the original image, which get closer to it as the starting index i gets higher. 
-            These are the results on the original Campanile image, a picture of coffee from 1951, and my friend's cat Peter!
+            In this section, I ran the same algorithm, except now I used a starting image, which I add noise to and then denoise with CFG. This gave me "edited" versions of the original image, which get closer to it as the starting index i gets higher. 
+            These are the results on the original Campanile image, a picture of my latte, and my friend's cat Peter!
         </p>
+        <h4 style="text-align: center;">Campanile</h4>
 
         <div class="image-row">
             <figure>
@@ -493,6 +514,9 @@
                 </figcaption>
             </figure>
         </div>
+        <br>
+
+        <h4 style="text-align: center;">Coffee</h4>
 
         <div class="image-row">
             <figure>
@@ -545,6 +569,9 @@
                 </figcaption>
             </figure>
         </div>
+        <br>
+
+        <h4 style="text-align: center;">Peter</h4>
 
         <div class="image-row">
             <figure>
@@ -598,13 +625,16 @@
             </figure>
         </div>
 
+        <br>
+
         <h3>Part 1.7.1</h3>
         <p>
             Here I did the same thing as 1.7, but with some other images. The first 2 examples are images I hand drew. The first image was meant to be a bag, but I guess the model interpreted it as more of a penguin, and as the i_start gets smaller, it even strays away from that. 
             The second image of a cat was somewhat recognized. 
             Then, for the last example, I used an image of Snoopy from the web. 
         </p>
-
+        <br>
+        <h4 style="text-align: center;">Bag Drawing</h4>
         <div class="image-row">
             <figure>
                 <img src="5a/5a.1.7.1/bag_drawing/bag_1.png" alt="bag_1">
@@ -656,7 +686,8 @@
                 </figcaption>
             </figure>
         </div>
-
+        <br>
+        <h4 style="text-align: center;">Cat Drawing</h4>
         <div class="image-row">
             <figure>
                 <img src="5a/5a.1.7.1/cat_drawing/cat_1.png" alt="cat_1">
@@ -708,6 +739,8 @@
                 </figcaption>
             </figure>
         </div>
+        <br>
+        <h4 style="text-align: center;">Snoopy</h4>
 
         <div class="image-row">
             <figure>
@@ -760,11 +793,15 @@
                 </figcaption>
             </figure>
         </div>
+        <br>
 
         <h3>Part 1.7.2</h3>
         <p>
             Now, for this section, I added inpainting! To do that, I used a mask for each image, and ran the same diffusion denoising loop on everything inside of the mask. 
+            I have displayed the mask I used for each of the three examples, and the inpainted outputs. It was interesting to see how the model produced something akin to what the original image was.
         </p>
+        <br>
+        <h4 style="text-align: center;">Campanile</h4>
 
         <div class="image-row">
             <figure>
@@ -796,6 +833,9 @@
                 </figcaption>
             </figure>
         </div>
+        <br>
+
+        <h4 style="text-align: center;">Coffee</h4>
 
         <div class="image-row">
             <figure>
@@ -828,6 +868,9 @@
             </figure>
         </div>
 
+        <br>
+
+        <h4 style="text-align: center;">Peter</h4>
         <div class="image-row">
             <figure>
                 <img src="5a/5a.1.7.2/peter/original.png" alt="peter_original">
@@ -861,9 +904,13 @@
 
         <h3>Part 1.7.3</h3>
         <p>
-            In this section, I used the same algorithm as before, but with a different prompt! For the Campanile image, I used "a man wearing a cat". 
-            For the coffee, I used my own prompt of "a cake". And finally, for the picture of the cat, I used the prompt "a dog". 
+            In this section, I used the same algorithm as before in 1.7 and 1.7.1, but with a different prompt! For the Campanile image, I used "a man wearing a hat". 
+            For the coffee, I used my own prompt of "a birthday cake". And finally, for the picture of the cat, I used the prompt "a dog". 
+            Here, we can see the image gradually getting closer to the original visually, as i_start gets larger.
         </p>
+        <br>
+
+        <h4 style="text-align: center;">Campanile - Hat</h4>
 
         <div class="image-row">
             <figure>
@@ -917,6 +964,10 @@
             </figure>
         </div>
 
+        <br>
+
+        <h4 style="text-align: center;">Coffee - Cake</h4>
+
         <div class="image-row">
             <figure>
                 <img src="5a/5a.1.7.3/cake_coffee/t=1.png" alt="t=1">
@@ -968,6 +1019,10 @@
                 </figcaption>
             </figure>
         </div>
+
+        <br>
+
+        <h4 style="text-align: center;">Cat - Dog</h4>
 
         <div class="image-row">
             <figure>
@@ -1021,32 +1076,54 @@
             </figure>
         </div>
 
+        <br>
+
         <h3>Part 1.8</h3>
         <p>
-           For 1.8, I used the same iterative denoising function with cfg as before, but now with a twist. I applied the algorthm to 2 seperate prompts, and for one of the prompts, I called it on the flipped version of an image, and flipped the result of that. Then I took the average of the 2 images. This gave me an image which was one prompt rightside up and another upside down. 
+           For 1.8, I used the same iterative denoising function with cfg as before, but now with a twist. I applied the algorthm to 2 seperate prompts, and for one of the prompts, I called it on the flipped version of an image, and flipped the result of that. Then I took the average of the 2 images. This gave me an image which followed one prompt rightside up and another upside down. 
            The first example was for the prompts "a skyscraper" and "a tall tree". The second for "a sketch of a cup coffee" and "a sketch of an island in the middle of the ocean". I had to run the algorithm as few times to produce good resulrs for these, as to allow the model to train and get better. 
         </p>
 
         <div class="image-row">
             <figure>
-                <img src="5a/5a.1.8/coffee_island.png" alt="coffee_island" style="max-width: 400px; height: auto;">
+                <img src="5a/5a.1.8/tree_skyscraper.png" alt="tree_skyscraper" style="max-width: 400px; height: auto;">
                 <figcaption>
-                    <span class="main-caption">coffee_island</span><br>
+                    <span class="main-caption">Tree - Skyscraper</span><br>
                     <!-- Add your caption here -->
                 </figcaption>
             </figure>
             <figure>
-                <img src="5a/5a.1.8/tree_skyscraper.png" alt="tree_skyscraper" style="max-width: 400px; height: auto;">
+                <img src="5a/5a.1.8/tree_skyscraper.png" alt="tree_skyscraper" style="max-width: 400px; height: auto; transform: rotate(180deg);">
                 <figcaption>
-                    <span class="main-caption">tree_skyscraper</span><br>
+                    <span class="main-caption">Tree - Skyscraper</span><br>
                     <!-- Add your caption here -->
                 </figcaption>
             </figure>
         </div>
 
+        <div class="image-row">
+            <figure>
+                <img src="5a/5a.1.8/coffee_island.png" alt="coffee_island" style="max-width: 400px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">Coffee - Island</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="5a/5a.1.8/coffee_island.png" alt="coffee_island" style="max-width: 400px; height: auto; transform: rotate(180deg);">
+                <figcaption>
+                    <span class="main-caption">Coffee - Island</span><br>
+                    <!-- Add your caption here -->
+                </figcaption>
+            </figure>
+        </div>
+
+        <br>
+
         <h3>Part 1.9</h3>
         <p>
-            And finally, for 1.9, I used the same algorithm once again. This time, like 1.8, I called it for 2 seperate prompts, but the difference was I combined them both rightside up, just using the high-pass version of one of the images and the low-pass version of the second. To achieve a good balance between both the images, I played around with the size of my kernel for filtering, until I was able to somewhat see both elements of the prompts in the image. 
+            And finally, for 1.9, I used the same algorithm once again. This time, like 1.8, I called it for 2 seperate prompts, but the difference was I combined them both rightside up, just using the high-pass version of one of the images and the low-pass version of the second. 
+            To achieve a good balance between both the images, I played around with the size of my kernel for filtering, until I was able to somewhat see both elements of the prompts in the image. 
             The first combines "a cake" and "a hat" and the second combines "a house" with "a painting of a face"
         </p>
 
@@ -1054,14 +1131,14 @@
             <figure>
                 <img src="5a/5a.1.9/cake_hat.png" alt="cake_hat" style="max-width: 400px; height: auto;">
                 <figcaption>
-                    <span class="main-caption">cake_hat</span><br>
+                    <span class="main-caption">Cake - Hat</span><br>
                     <!-- Add your caption here -->
                 </figcaption>
             </figure>
             <figure>
                 <img src="5a/5a.1.9/house_face.png" alt="house_face" style="max-width: 400px; height: auto;">
                 <figcaption>
-                    <span class="main-caption">house_face</span><br>
+                    <span class="main-caption">House - Face</span><br>
                     <!-- Add your caption here -->
                 </figcaption>
             </figure>
@@ -1069,12 +1146,14 @@
 
     </section>
 
+    <br>
+
     <section class="project-section">
         <h2>5B</h2>
         
         <h3>Part 1.2</h3>
         <p>
-           In this section, I visualized different noise levels (seen in the captions below)
+           In this section, I visualized different noise levels called on a random digit image sampled from the training data. 
         </p>
 
         <div class="image-row">
@@ -1129,9 +1208,13 @@
             </figure>
         </div>
 
+        <br>
+
         <h3>Part 1.2.1</h3>
         <p>
-            <!-- Add your paragraph here -->
+            In this section I trained a denoiser (UNet) using the MNIST training data. I used a noise level of 0.5 on my training data. 
+            I ran training for 5 epochs with a batch size of 256. 
+            Below is a visualization of inferencing on a few sample images after the 1st and 5th epochs of training. 
         </p>
 
         <h4>Epoch 1</h4>
@@ -1207,7 +1290,7 @@
             </figure>
         </div>
 
-        <h4>Epoch 2</h4>
+        <h4>Epoch 5</h4>
         <div class="image-row">
             <figure>
                 <img src="5b/5b.1.2.1/sample4_original.png" alt="sample4_original">
@@ -1279,21 +1362,25 @@
                 </figcaption>
             </figure>
         </div>
+
+        <br>
+        <p> 
+            And here is the training curve for the 5 epochs of training. 
+        </p>
         <div class="image-row">
             <figure>
-                <img src="5b/5b.1.2.1/training_curve.png" alt="sample21_denoise">
-                <figcaption>
-                    <span class="main-caption">Sample 3 Denoised</span><br>
-                    <!-- Add your caption here -->
-                </figcaption>
+                <img src="5b/5b.1.2.1/training_curve.png" alt="sample21_denoise", style="width: 600px;"">
+
             </figure>
         </div>
 
         <h3>Part 1.2.2</h3>
         <p>
-            In this section, I used the denoiser on digits outset of the training set, and tested multiple noise values. here are the samples results for each of the noise values. 
+            In this section, I ran my model on multiple different noise levels (the same ones visualized in 1.2). 
+            My model performed as I predicted, creating strong recreations when the noise level was low and weak, scribble-like images when the noise level grew. 
         </p>
 
+        <h4>Noise = 0</h4>
         <div class="image-row">
             <figure>
                 <img src="5b/5b.1.2.2/sample1_original.png" alt="sample1_original">
@@ -1366,6 +1453,7 @@
             </figure>
         </div>
 
+        <h4>Noise = 0.2</h4>
         <div class="image-row">
             <figure>
                 <img src="5b/5b.1.2.2/sample4_original.png" alt="sample4_original">
@@ -1437,7 +1525,8 @@
                 </figcaption>
             </figure>
         </div>
-
+        
+        <h4>Noise = 0.4</h4>
         <div class="image-row">
             <figure>
                 <img src="5b/5b.1.2.2/sample7_original.png" alt="sample7_original">
@@ -1461,6 +1550,7 @@
                 </figcaption>
             </figure>
         </div>
+
 
         <div class="image-row">
             <figure>
@@ -1509,7 +1599,7 @@
                 </figcaption>
             </figure>
         </div>
-
+        <h4>Noise = 0.5</h4>
         <div class="image-row">
             <figure>
                 <img src="5b/5b.1.2.2/sample10_original.png" alt="sample10_original">
@@ -1581,6 +1671,8 @@
                 </figcaption>
             </figure>
         </div>
+
+        <h4>Noise = 0.6</h4>
 
         <div class="image-row">
             <figure>
@@ -1654,6 +1746,8 @@
             </figure>
         </div>
 
+        <h4>Noise = 0.8</h4>
+
         <div class="image-row">
             <figure>
                 <img src="5b/5b.1.2.2/sample16_original.png" alt="sample16_original">
@@ -1725,6 +1819,8 @@
                 </figcaption>
             </figure>
         </div>
+
+        <h4>Noise = 1.0</h4>
 
         <div class="image-row">
             <figure>
@@ -1801,9 +1897,14 @@
 
         <h3>Part 1.2.3</h3>
         <p>
-            In this section, instead of denoising noisy digits, I attempted to denoise pure noise itself, given that the model was tested on actual digits, hopefully it would produce something similar to the training images. 
-            All the denoised images look exactly the same, which makes sense, given that it is not getting a different input to inference on, just pure noise, and it doesn't reallt resemble any specific digit. 
+            In this section, instead of training denoising noisy digits, I attempted to train for denoising pure noise itself. 
+            I ran the same training algorithm, expect now, for every training image, I added a noise level of 1.0, meaning the image was pure noise.
+            This unfortunately did not yield good results at all. However, it kind of does make sense, since the input images had no specific features, they were just noise, the model didn't really have anything to train on. 
+            This produced a model which outputs the same image, no matter what we pass in, and the output itself (seen below) looks very vague and blurry, not like any specific digit.   
         </p>
+
+        <br>
+        <h4>Epoch 1</h4>
 
         <div class="image-row">
             <figure>
@@ -1877,6 +1978,9 @@
             </figure>
         </div>
 
+        <br>
+        <h4>Epoch 5</h4>
+
         <div class="image-row">
             <figure>
                 <img src="5b/5b.1.2.3/sample4_original.png" alt="sample4_original">
@@ -1948,55 +2052,71 @@
                 </figcaption>
             </figure>
         </div>
+        <br>
+        <p>
+            And here is the training curve for training on pure noise. 
+        </p>
         <div class="image-row">
             <figure>
-                <img src="5b/5b.1.2.3/sample6_denoise.png" alt="sample6_denoise">
-                <figcaption>
-                    <span class="main-caption">Sample 3 Denoised</span><br>
-                    <!-- Add your caption here -->
-                </figcaption>
+                <img src="5b/5b.1.2.3/training_curve.png" alt="sample6_denoise" style="width: 600px;">
             </figure>
         </div>
 
         <h3>Part 2.1 - 2.3</h3>
+
+        <p>
+            In this section, I added time-conditioning to my UNet from Part 1. This is similar the iterative denoising from Project 5a, where now our model takes in an image + a timestep the image is at in its denoising process. 
+            I also implemented the new training algorithm, which incorporates 2 new FC (fully-connected) blocks that utilize the timestep t. And, I implemented the sample algorithm, which I call during training to show how the model performs. 
+            For reference, I used a batch size of 64 and 10 epochs to train. 
+            Below are the outputs of samples at epochs 1, 5, and 10.   
+        </p>
+
+
+
         <div style="text-align: center; margin: 20px 0;">
             <figure>
-                <img src="5b/5b.2.6/epoch1_no_scheduler.png" alt="Campanile" style="max-width: 600px; height: auto;">
+                <img src="5b/5b.2.3/epoch1.png" alt="Campanile" style="max-width: 600px; height: auto;">
                 <figcaption>
                     <span class="main-caption">Epoch 1</span><br>
                 </figcaption>
             </figure>
         </div>
+
         <div style="text-align: center; margin: 20px 0;">
             <figure>
-                <img src="5b/5b.2.6/epoch5_no_scheduler.png" alt="Campanile" style="max-width: 600px; height: auto;">
+                <img src="5b/5b.2.3/epoch5.png" alt="Campanile" style="max-width: 600px; height: auto;">
                 <figcaption>
                     <span class="main-caption">Epoch 5</span><br>
                 </figcaption>
             </figure>
         </div>
+
         <div style="text-align: center; margin: 20px 0;">
             <figure>
-                <img src="5b/5b.2.6/epoch10_no_scheduler.png" alt="Campanile" style="max-width: 600px; height: auto;">
+                <img src="5b/5b.2.3/epoch10.png" alt="Campanile" style="max-width: 600px; height: auto;">
                 <figcaption>
                     <span class="main-caption">Epoch 10</span><br>
                 </figcaption>
             </figure>
         </div>
+        <br>
+        <h4>Training Curve</h4>
+        <br>
         <div style="text-align: center; margin: 20px 0;">
             <figure>
-                <img src="5b/5b.2.6/training_curve_no_scheduler.png" alt="Campanile" style="max-width: 600px; height: auto;">
-                <figcaption>
-                    <span class="main-caption">Training Curve</span><br>
-                </figcaption>
+                <img src="5b/5b.2.3/training_curve.png" alt="Campanile" style="max-width: 600px; height: auto;">
             </figure>
         </div>
 
 
         <h3>Part 2.4 - 2.6</h3>
+        <p>
+            Now, for the next 3 parts of the project, I also added class-conditioning. This consists of adding 2 more FC blocks that also take in the class (label) of the training images. 
+            Again, here are the outputs after epochs 1, 5, and 10. 
+        </p>
         <div style="text-align: center; margin: 20px 0;">
             <figure>
-                <img src="5b/5b.2.6/epoch1.png" alt="Campanile" style="max-width: 600px; height: auto;">
+                <img src="5/5b/5b.2.6/epoch1.png" alt="Campanile" style="max-width: 600px; height: auto;">
                 <figcaption>
                     <span class="main-caption">Epoch 1</span><br>
                 </figcaption>
@@ -2004,7 +2124,7 @@
         </div>
         <div style="text-align: center; margin: 20px 0;">
             <figure>
-                <img src="5b/5b.2.6/epoch5.png" alt="Campanile" style="max-width: 600px; height: auto;">
+                <img src="5/5b/5b.2.6/epoch5.png" alt="Campanile" style="max-width: 600px; height: auto;">
                 <figcaption>
                     <span class="main-caption">Epoch 5</span><br>
                 </figcaption>
@@ -2012,7 +2132,7 @@
         </div>
         <div style="text-align: center; margin: 20px 0;">
             <figure>
-                <img src="5b/5b.2.6/epoch10.png" alt="Campanile" style="max-width: 600px; height: auto;">
+                <img src="5/5b/5b.2.6/epoch10.png" alt="Campanile" style="max-width: 600px; height: auto;">
                 <figcaption>
                     <span class="main-caption">Epoch 10</span><br>
                 </figcaption>
@@ -2021,6 +2141,44 @@
         <div style="text-align: center; margin: 20px 0;">
             <figure>
                 <img src="5b/5b.2.6/training_curve.png" alt="Campanile" style="max-width: 600px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">Training Curve</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <br>
+        <p>
+            I also repeated this process one more time, but this time, I didn't include a scheduler as part of my training process. 
+            To make up for this, I made my learning rate smaller. This made training a bit slower, but I found that I reached around the same levels of loss as I had with the scheduler. 
+        </p>
+        <br>
+        <div style="text-align: center; margin: 20px 0;">
+            <figure>
+                <img src="5/5b/5b.2.6/epoch1_no_scheduler.png" alt="Campanile" style="max-width: 600px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">Epoch 1</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <div style="text-align: center; margin: 20px 0;">
+            <figure>
+                <img src="5/5b/5b.2.6/epoch5_no_scheduler.png" alt="Campanile" style="max-width: 600px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">Epoch 5</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <div style="text-align: center; margin: 20px 0;">
+            <figure>
+                <img src="5/5b/5b.2.6/epoch10_no_scheduler.png" alt="Campanile" style="max-width: 600px; height: auto;">
+                <figcaption>
+                    <span class="main-caption">Epoch 10</span><br>
+                </figcaption>
+            </figure>
+        </div>
+        <div style="text-align: center; margin: 20px 0;">
+            <figure>
+                <img src="5b/5b.2.6/training_curve_no_scheduler.png" alt="Campanile" style="max-width: 600px; height: auto;">
                 <figcaption>
                     <span class="main-caption">Training Curve</span><br>
                 </figcaption>
